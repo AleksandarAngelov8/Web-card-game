@@ -1,0 +1,52 @@
+<!-- Erstellt von Angelov -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/full_text_search.js"></script>
+    <title>Search Results</title>
+    <style>
+        .search-panel {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px;
+        }
+        .search-results li {
+            margin-bottom: 5px;
+        }
+        #results-panel{
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="search-panel">
+    <input type="text" id="searchbar" placeholder="Search...">
+    <button id="searchButton">Search</button>
+</div>
+
+<div id="results-panel" class="search-panel">
+    <h2 id="search_query"></h2>
+    <ul id="rede_list"></ul>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchbar');
+    const searchButton = document.getElementById('searchButton');
+
+    searchButton.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    function handleSearch() {
+        var keyWord = searchInput.value;
+        document.getElementById("search_query").innerHTML = keyWord;
+        loadResults(keyWord);
+    }
+</script>
+</body>
+</html>

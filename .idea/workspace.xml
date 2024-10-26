@@ -4,11 +4,85 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="first commit" />
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/public/ajax_functionality.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/template/template.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/change_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_cas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_speeches.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_speeches_result.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/download.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/fortschritt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/full_text_search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/full_text_search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/generic_search.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_protocols.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_speakers.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_speeches.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_users.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/named_entity_bubble.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/pos_barchart.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocol.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocol_view.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocols.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/rede.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/representatives.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/sentiment_radarchart.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/text_analysis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/topic_sunburst.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/template/template.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/change_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_cas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_speeches.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_speeches_result.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/download.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/fortschritt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/full_text_search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/full_text_search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/generic_search.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_protocols.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_speakers.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_speeches.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_users.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/named_entity_bubble.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/pos_barchart.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/protocol.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/protocol_view.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/protocols.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/rede.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/representatives.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/sentiment_radarchart.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/text_analysis.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/topic_sunburst.ftl" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,8 +165,17 @@
       <workItem from="1729964623494" duration="48000" />
       <workItem from="1729964737123" duration="63000" />
       <workItem from="1729966223197" duration="653000" />
-      <workItem from="1729967686704" duration="36000" />
+      <workItem from="1729967686704" duration="4229000" />
     </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1729967904951</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729967904951</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,5 +191,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

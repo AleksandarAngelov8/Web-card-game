@@ -33,7 +33,4 @@ public class MongoDBHandler {
 
         database = mongoClient.getDatabase("web_testing");
     }
-    public void Test(){
-        System.out.println(database.getCollection("testing").countDocuments());
-    }
 }

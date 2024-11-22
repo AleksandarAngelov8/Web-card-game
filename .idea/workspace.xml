@@ -4,68 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="dynamic changing of website with backend logic">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="cleaned up mongodbhandler and other unneeded stuff">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Abgeordneter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/CAS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Pictures.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Protokoll.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Rede.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/SozialeMedien.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Abgeordneter_MongoDB_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Protokoll_MongoDB_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Rede_MongoDB_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NLP/CAS_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/User_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/abgeordneterErstellen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/createSpeaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/dateCheck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/downloadJSON.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/extractZip.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/importPictures.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/pictures.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/sozialMedia.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/uploadProtocol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/xmlAnalyzer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Abgeordneter_xml_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Pictures_xml_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Protokoll_xml_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Rede_xml_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/SozialeMedien_xml_Impl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbConnection/mongoDBConnectionHandler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbConnection/mongoDBConnectionHandler.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Abgeordneter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/CAS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Pictures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Protokoll.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Rede.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/SozialeMedien.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Abgeordneter_MongoDB_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Protokoll_MongoDB_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Rede_MongoDB_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NLP/CAS_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserRightsManager/UserRightsManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UserRightsManager/User_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/abgeordneterErstellen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/createSpeaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/dateCheck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/downloadJSON.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/extractZip.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/importPictures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/pictures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/sozialMedia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/uploadProtocol.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/xmlAnalyzer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dbConnection/mongoDBConnectionHandler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dbConnection/mongoDBConnectionHandler.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Abgeordneter_xml_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Pictures_xml_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Protokoll_xml_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Rede_xml_Impl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/SozialeMedien_xml_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Main.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -98,29 +45,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dynamic.classpath&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kucem/IdeaProjects/PSPHVUI&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dynamic.classpath": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/kucem/IdeaProjects/PSPHVUI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data.Main" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="parliament_browser_3_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,7 +116,7 @@
       <workItem from="1729967686704" duration="4229000" />
       <workItem from="1729972810150" duration="45000" />
       <workItem from="1731177795273" duration="32000" />
-      <workItem from="1732275467903" duration="2334000" />
+      <workItem from="1732275467903" duration="2796000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -181,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729972850146</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="cleaned up mongodbhandler and other unneeded stuff">
+      <option name="closed" value="true" />
+      <created>1732277921233</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732277921233</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,7 +162,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="dynamic changing of website with backend logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="dynamic changing of website with backend logic" />
+    <MESSAGE value="cleaned up mongodbhandler and other unneeded stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up mongodbhandler and other unneeded stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

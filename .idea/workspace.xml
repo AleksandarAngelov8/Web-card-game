@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="cleaned up mongodbhandler and other unneeded stuff">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="routehandler class and more cleanup">
+      <change afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/public/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
     "WebServerToolWindowFactoryState": "false",
     "dynamic.classpath": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/kucem/IdeaProjects/PSPHVUI",
+    "last_opened_file_path": "C:/Users/kucem/IdeaProjects/web_testing/src/main/resources/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,8 +65,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kucem\IdeaProjects\web_testing\src\main\resources\public" />
+      <recent name="C:\Users\kucem\IdeaProjects\web_testing\src\main\java" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="RouteHandler" />
     </key>
   </component>
   <component name="RunManager">
@@ -116,7 +125,8 @@
       <workItem from="1729967686704" duration="4229000" />
       <workItem from="1729972810150" duration="45000" />
       <workItem from="1731177795273" duration="32000" />
-      <workItem from="1732275467903" duration="2796000" />
+      <workItem from="1732275467903" duration="2987000" />
+      <workItem from="1732286674979" duration="7523000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -142,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732277921233</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="routehandler class and more cleanup">
+      <option name="closed" value="true" />
+      <created>1732278298444</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732278298444</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +181,8 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="dynamic changing of website with backend logic" />
     <MESSAGE value="cleaned up mongodbhandler and other unneeded stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up mongodbhandler and other unneeded stuff" />
+    <MESSAGE value="routehandler class and more cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="routehandler class and more cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -16,5 +16,10 @@
 <div id="dashboard">
     <!-- Dashboard content will be updated here -->
 </div>
+<table>
+<#list users as name,user>
+<td>${name}</td>
+</#list>
+</table>
 </body>
 </html>

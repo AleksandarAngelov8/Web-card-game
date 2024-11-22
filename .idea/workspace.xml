@@ -4,73 +4,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/public/ajax_functionality.js" afterDir="false" />
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="dynamic changing of website with backend logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Abgeordneter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/CAS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Pictures.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Protokoll.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/Rede.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interface/SozialeMedien.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Abgeordneter_MongoDB_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Protokoll_MongoDB_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDB_Impl/Rede_MongoDB_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NLP/CAS_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/User_Impl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/data/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.aux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/protocol.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/LaTeX/template/template.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/change_password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_cas.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_speeches.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/date_search_speeches_result.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/download.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/fortschritt.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/full_text_search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/full_text_search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/generic_search.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_protocols.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_speakers.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_speeches.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/manage_users.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/named_entity_bubble.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/pos_barchart.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocol.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocol_view.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/protocols.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/rede.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/representatives.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/sentiment_radarchart.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/text_analysis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/topic_sunburst.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/abgeordneterErstellen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/createSpeaker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/dateCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/downloadJSON.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/extractZip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/importPictures.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/pictures.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/sozialMedia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/uploadProtocol.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/xmlAnalyzer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Abgeordneter_xml_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Pictures_xml_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Protokoll_xml_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/Rede_xml_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xml_Impl/SozialeMedien_xml_Impl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbConnection/mongoDBConnectionHandler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbConnection/mongoDBConnectionHandler.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Abgeordneter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/CAS.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Pictures.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Protokoll.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Rede.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/SozialeMedien.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Abgeordneter_MongoDB_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Protokoll_MongoDB_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MongoDB_Impl/Rede_MongoDB_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NLP/CAS_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UserRightsManager/UserRightsManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UserRightsManager/User_Impl.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.aux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/protocol.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/LaTeX/template/template.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/change_password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_cas.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_speeches.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/date_search_speeches_result.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/download.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/fortschritt.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/full_text_search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/full_text_search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/generic_search.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_protocols.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_speakers.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_speeches.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/manage_users.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/named_entity_bubble.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/pos_barchart.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/protocol.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/protocol_view.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/protocols.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/rede.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/representatives.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/sentiment_radarchart.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/text_analysis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/public/topic_sunburst.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/abgeordneterErstellen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/createSpeaker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/dateCheck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/downloadJSON.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/extractZip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/importPictures.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/pictures.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/sozialMedia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/uploadProtocol.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/xmlAnalyzer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dbConnection/mongoDBConnectionHandler.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dbConnection/mongoDBConnectionHandler.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Abgeordneter_xml_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Pictures_xml_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Protokoll_xml_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/Rede_xml_Impl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xml_Impl/SozialeMedien_xml_Impl.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +105,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dynamic.classpath&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kucem/IdeaProjects/web_testing&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kucem/IdeaProjects/PSPHVUI&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -166,6 +161,9 @@
       <workItem from="1729964737123" duration="63000" />
       <workItem from="1729966223197" duration="653000" />
       <workItem from="1729967686704" duration="4229000" />
+      <workItem from="1729972810150" duration="45000" />
+      <workItem from="1731177795273" duration="32000" />
+      <workItem from="1732275467903" duration="2334000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -175,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729967904951</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="dynamic changing of website with backend logic">
+      <option name="closed" value="true" />
+      <created>1729972850146</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729972850146</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +200,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="dynamic changing of website with backend logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamic changing of website with backend logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

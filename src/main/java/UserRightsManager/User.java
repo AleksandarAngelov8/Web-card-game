@@ -2,6 +2,13 @@ package UserRightsManager;
 
 public class User {
 
+    private String storedInfo;
+    public void setStoredInfo(String sI){
+        this.storedInfo = sI;
+    }
+    public String getStoredInfo() {
+        return storedInfo;
+    }
     public void setUsername(String username) {
         this.username = username;
     }
@@ -26,6 +33,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.rights = admin;
+        this.storedInfo = "";
     }
 
     public boolean authenticate(String passwordAttempt) {

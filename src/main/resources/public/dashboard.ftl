@@ -13,14 +13,12 @@
 </form>
 
 </button>
-<div id="dashboard">
-    <!-- Dashboard content will be updated here -->
-</div>
-<table>
-<#list users as name,user>
-    <td>${name}</td>
+
+<#list users?keys as key>
+    <div id="${key}">
+        ${users[key].storedInfo}
+    </div>
 </#list>
-</table>
 <form action="/logout" method="post">
     <button>Logout</button>
 </form>

@@ -21,6 +21,7 @@ public class RouteHandler {
         final Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
         configuration.setClassForTemplateLoading(org.apache.ivy.Main.class, "/public");
 
+
         get("/dashboard", (request, response) -> {
             if (!isValidSessionToken(request)) {
                 response.redirect("/login");
@@ -45,7 +46,9 @@ public class RouteHandler {
             return writer.toString();
         });
         post("/raise_hand", (request, response) -> {
+            if (!isValidSessionToken(request)) return null;
             String name = request.queryParams("name");
+            String username = request.session().attribute("username");
             Set<String> names = new HashSet<>(){
                 {
                     add("John");
@@ -57,7 +60,11 @@ public class RouteHandler {
             if (names.contains(name)) {
                 request.session().attribute("name", name);
                 jsonResponse.put("success", true);
+                jsonResponse.put("username", username);
                 jsonResponse.put("message", "Name received: " + name);
+
+                String info = userRightsManager.getUsers().get(username).getStoredInfo();
+                userRightsManager.getUsers().get(username).setStoredInfo(info+name);
             } else {
                 jsonResponse.put("success", false);
                 jsonResponse.put("message", "Name not allowed.");

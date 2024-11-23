@@ -29,7 +29,7 @@ public class RouteHandler {
             }
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("users",userRightsManager.getOnlineUsers());
-            String name = request.session().attribute("name");
+            String name = request.session().attribute("username");
             if (name != null) {
                 attributes.put("name", name);
             } else {
@@ -110,6 +110,17 @@ public class RouteHandler {
             userRightsManager.getUsers().get(username).activateSession(null);
             response.redirect("/login");
             return null;
+        });
+        get("/websocket",(request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            StringWriter writer = new StringWriter();
+            try {
+                Template representativesTemplate = configuration.getTemplate("index.html");
+                representativesTemplate.process(attributes, writer);
+            } catch (Exception e) {
+                halt(500);
+            }
+            return writer;
         });
     }
     private static boolean isValidSessionToken(spark.Request request) {

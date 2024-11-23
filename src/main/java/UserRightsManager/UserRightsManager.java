@@ -26,12 +26,12 @@ public class UserRightsManager {
      * @param connectionHandler connection handler
      */
     public UserRightsManager(MongoDBHandler connectionHandler) {
-        System.out.println("User list:");
+        //System.out.println("User list:");
         List<User> userList = connectionHandler.getUsers();
         for (User user: userList){
             users.put(user.getUsername(),user);
         }
-        printUserInfo();
+        //printUserInfo();
     }
 
     /**

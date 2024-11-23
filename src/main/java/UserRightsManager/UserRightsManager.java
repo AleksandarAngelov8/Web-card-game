@@ -21,15 +21,6 @@ public class UserRightsManager {
     }
     private Map<String,User> users = new HashMap<>();
 
-    public String getCurrentSessionToken() {
-        return currentSessionToken;
-    }
-
-    public void setCurrentSessionToken(String currentSessionToken) {
-        this.currentSessionToken = currentSessionToken;
-    }
-
-    private String currentSessionToken;
     /**
      * lade die Benutzer von DB
      * @param connectionHandler connection handler
@@ -40,7 +31,6 @@ public class UserRightsManager {
         for (User user: userList){
             users.put(user.getUsername(),user);
         }
-        currentSessionToken = "";
         printUserInfo();
     }
 
@@ -186,6 +176,8 @@ public class UserRightsManager {
             System.out.print("Username: " + user);
             System.out.print("\tPassword: " + users.get(user).getPassword());
             System.out.println("\tRights: " + users.get(user).getRights());
+            System.out.println("\nToken: " + users.get(user).sessionToken);
+            System.out.println("\n");
         }
     }
 

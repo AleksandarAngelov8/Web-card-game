@@ -18,8 +18,11 @@
 </div>
 <table>
 <#list users as name,user>
-<td>${name}</td>
+    <td>${name}</td>
 </#list>
 </table>
+<form action="/logout" method="post">
+    <button>Logout</button>
+</form>
 </body>
 </html>

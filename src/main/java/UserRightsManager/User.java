@@ -20,7 +20,7 @@ public class User {
     }
 
     private int rights;// 0-User, 1-Manager, 2-Admin
-    private String sessionToken;
+    public String sessionToken;
 
     public User(String username, String password, int admin) {
         this.username = username;

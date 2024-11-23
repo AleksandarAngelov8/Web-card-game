@@ -1,15 +1,10 @@
 package RouteHandler;
 
 import UserRightsManager.UserRightsManager;
+import UserRightsManager.User;
 import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.StringWriter;
 import java.util.*;
@@ -17,7 +12,9 @@ import java.util.*;
 import static spark.Spark.*;
 
 public class RouteHandler {
+    static private UserRightsManager userRightsManagerLocal;
     static public void SetupRoutes(UserRightsManager userRightsManager){
+        userRightsManagerLocal = userRightsManager;
         ipAddress("0.0.0.0");
         port(4567);
         staticFileLocation("/public");
@@ -25,6 +22,10 @@ public class RouteHandler {
         configuration.setClassForTemplateLoading(org.apache.ivy.Main.class, "/public");
 
         get("/dashboard", (request, response) -> {
+            if (!isValidSessionToken(request)) {
+                response.redirect("/login");
+                return null;
+            }
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("users",userRightsManager.getOnlineUsers());
             String name = request.session().attribute("name");
@@ -66,8 +67,7 @@ public class RouteHandler {
             return new Gson().toJson(jsonResponse);
         });
         get("/login", (request, response) -> {
-            String sessionToken = userRightsManager.getCurrentSessionToken();
-            if (sessionToken != null && isValidSessionToken(sessionToken, request)) {
+            if (isValidSessionToken(request)) {
                 response.redirect("/dashboard");
                 return null;
             }
@@ -90,7 +90,6 @@ public class RouteHandler {
             if (userRightsManager.authenticate(username, password, sessionToken)) {
                 request.session().attribute("sessionToken", sessionToken);
                 request.session().attribute("username", username);
-                userRightsManager.setCurrentSessionToken(sessionToken);
 
                 response.redirect("/dashboard");
             } else {
@@ -98,8 +97,20 @@ public class RouteHandler {
             }
             return null;
         });
+        post("/logout", (request, response) -> {
+            request.session().attribute("sessionToken", "");
+            String username = request.session().attribute("username");
+            userRightsManager.getUsers().get(username).activateSession(null);
+            response.redirect("/login");
+            return null;
+        });
     }
-    private static boolean isValidSessionToken(String sessionToken, spark.Request request) {
-        return sessionToken.equals(request.session().attribute("sessionToken"));
+    private static boolean isValidSessionToken(spark.Request request) {
+        String username = request.session().attribute("username");
+        User user = userRightsManagerLocal.getUsers().get(username);
+        return user != null &&
+                user.sessionToken != null &&
+                user.sessionToken.equals(request.session().attribute("sessionToken")) &&
+                !user.sessionToken.isEmpty();
     }
 }

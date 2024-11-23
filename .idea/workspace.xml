@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="routehandler class and more cleanup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/public/login.html" afterDir="false" />
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="added users">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MongoDBConnectionHandler/MongoDBHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MongoDBConnectionHandler/MongoDBHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +44,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dynamic.classpath": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/kucem/IdeaProjects/web_testing/src/main/resources/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dynamic.classpath&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kucem/IdeaProjects/web_testing/src/main/resources/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kucem\IdeaProjects\web_testing\src\main\resources\public" />
@@ -126,7 +123,10 @@
       <workItem from="1729972810150" duration="45000" />
       <workItem from="1731177795273" duration="32000" />
       <workItem from="1732275467903" duration="2987000" />
-      <workItem from="1732286674979" duration="7523000" />
+      <workItem from="1732286674979" duration="7981000" />
+      <workItem from="1732313236342" duration="337000" />
+      <workItem from="1732313701942" duration="1463000" />
+      <workItem from="1732353031520" duration="2669000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -160,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732278298444</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added users">
+      <option name="closed" value="true" />
+      <created>1732296961033</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732296961033</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +190,8 @@
     <MESSAGE value="dynamic changing of website with backend logic" />
     <MESSAGE value="cleaned up mongodbhandler and other unneeded stuff" />
     <MESSAGE value="routehandler class and more cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="routehandler class and more cleanup" />
+    <MESSAGE value="added users" />
+    <option name="LAST_COMMIT_MESSAGE" value="added users" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,19 +1,45 @@
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 3000 });
 
+let communicationToken;
+
+function handShakeWithJavaServer(){
+    fetch("http://localhost:4567/hand_shake", {
+        method: "GET",})
+        .then(r => r.text())
+        .then(token => {
+            communicationToken = token
+        })
+        .catch(error => console.error('Error during handshake:', error));
+}
+handShakeWithJavaServer();
+
 wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         const data = JSON.parse(message);
 
         if (data.type === "raise_hand") {
             const username = data.username;
-            console.log(`${username} raised their hand`);
+            const info = data.username + ' raised their hand';
+            console.log(info);
 
-            // Broadcast the update to all connected clients
+
             broadcast({
                 type: "update_user",
-                userKey: username, // Use the username as the key
-                message: `${username} raised their hand!`
+                userKey: username,
+                message: info
+            });
+
+            fetch("http://localhost:4567/update_info", {
+                method: "POST",
+                body: JSON.stringify({
+                    username: username,
+                    token: communicationToken,
+                    info: info
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
             });
         }
     });

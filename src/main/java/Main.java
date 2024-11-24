@@ -1,4 +1,3 @@
-import JettyServer.JettyServer;
 import MongoDBConnectionHandler.MongoDBHandler;
 import NodeJsServer.NodeJsServerRunner;
 import RouteHandler.RouteHandler;
@@ -9,11 +8,8 @@ public class Main {
         MongoDBHandler connectionHandler = new MongoDBHandler();
         UserRightsManager userRightsManager = new UserRightsManager(connectionHandler);
         RouteHandler.SetupRoutes(userRightsManager);
-        //could use this instead of Jetty
-        //NodeJsServerRunner.Run();
+        NodeJsServerRunner.Run();
         //userRightsManager.printUserInfo();
 
-        JettyServer js = new JettyServer();
-        js.start();
     }
 }

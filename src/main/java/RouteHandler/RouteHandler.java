@@ -9,6 +9,7 @@ import freemarker.template.Template;
 import java.io.StringWriter;
 import java.util.*;
 
+import NodeJsServer.NodeJsServerRunner;
 import static spark.Spark.*;
 
 public class RouteHandler {
@@ -122,6 +123,25 @@ public class RouteHandler {
             }
             return writer;
         });
+        post("/update_info", (request, response) -> {
+            String json = request.body();
+            Map bodyAttributes = new Gson().fromJson(json, Map.class);
+            if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
+            String name = bodyAttributes.get("username").toString();
+            userRightsManager.getUsers().get(name).setStoredInfo(bodyAttributes.get("info").toString());
+            return null;
+        });
+        get("/hand_shake", (request, response) -> {
+            if (NodeJsServerRunner.communicationToken == null){
+                NodeJsServerRunner.communicationToken = UUID.randomUUID().toString();
+                request.session().attribute("communicationToken",NodeJsServerRunner.communicationToken);
+
+                System.out.println("Communication token has been set!");
+            }
+            return NodeJsServerRunner.communicationToken;
+        });
+
+
     }
     private static boolean isValidSessionToken(spark.Request request) {
         String username = request.session().attribute("username");
@@ -130,5 +150,8 @@ public class RouteHandler {
                 user.sessionToken != null &&
                 user.sessionToken.equals(request.session().attribute("sessionToken")) &&
                 !user.sessionToken.isEmpty();
+    }
+    private static boolean isValidCommunicationToken(String jsCommunicationToken){
+        return jsCommunicationToken.equals(NodeJsServerRunner.communicationToken);
     }
 }

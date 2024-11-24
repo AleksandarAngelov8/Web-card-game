@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class NodeJsServerRunner {
+    public static String communicationToken;
     public static void Run(){
         Process process = null;
         try {

@@ -4,22 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="working on mutually updated changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/JettyServer/AsyncServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JettyServer/BlockingServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JettyServer/JettyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/JettyServer/JettyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/NodeJsServer/NodeJsServerRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="added jetty support also possible node.js support if i decide to try different implementations of the server realtime communication">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Player/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard_functionality.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_03_03.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/class_diagramm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_content.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JettyServer/AsyncServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JettyServer/BlockingServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JettyServer/JettyServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JettyServer/JettyTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NodeJsServer/NodeJsServerRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NodeJsServer/NodeJsServerRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/dashboard.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -101,7 +99,7 @@
       <module name="parliament_browser_3_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="JettyServer.*" />
+          <option name="PATTERN" value="JettyServer.Servelet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -116,7 +114,7 @@
       <module name="parliament_browser_3_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="JettyServer.*" />
+          <option name="PATTERN" value="JettyServer.Servelet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,9 +126,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JettyTest.givenServer_whenSendRequestToNonBlockingServlet_thenReturnStatusOK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="parliament_browser_3_3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="JettyServer.Servelet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="JettyServer" />
+      <option name="MAIN_CLASS_NAME" value="JettyServer.JettyTest" />
+      <option name="METHOD_NAME" value="givenServer_whenSendRequestToNonBlockingServlet_thenReturnStatusOK" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.JettyTest.givenServer_whenSendRequestToNonBlockingServlet_thenReturnStatusOK" />
         <item itemvalue="JUnit.JettyTest.givenServer_whenSendRequestToBlockingServlet_thenReturnStatusOK" />
         <item itemvalue="JUnit.JettyTest" />
       </list>
@@ -175,7 +190,10 @@
       <workItem from="1732385623778" duration="11947000" />
       <workItem from="1732399563918" duration="4412000" />
       <workItem from="1732403991898" duration="1158000" />
-      <workItem from="1732405161433" duration="723000" />
+      <workItem from="1732405161433" duration="802000" />
+      <workItem from="1732439999188" duration="10732000" />
+      <workItem from="1732452231211" duration="1764000" />
+      <workItem from="1732466101491" duration="6627000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -233,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732380364463</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added jetty support also possible node.js support if i decide to try different implementations of the server realtime communication">
+      <option name="closed" value="true" />
+      <created>1732405959636</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732405959636</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +284,8 @@
     <MESSAGE value="added users" />
     <MESSAGE value="improved logging in/out system" />
     <MESSAGE value="working on mutually updated changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on mutually updated changes" />
+    <MESSAGE value="added jetty support also possible node.js support if i decide to try different implementations of the server realtime communication" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jetty support also possible node.js support if i decide to try different implementations of the server realtime communication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

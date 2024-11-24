@@ -5,7 +5,7 @@
         let username = "${name}";
 
         // Establish WebSocket connection
-        const ws = new WebSocket("ws://localhost:3000");
+        const ws = new WebSocket("ws://localhost:3000/ws");
 
         ws.onopen = () => {
             console.log(`${name} is connected.`);
@@ -17,10 +17,13 @@
 
             // Dynamically update user info
             if (messageData.type === "update_user") {
-                const userDiv = document.getElementById(messageData.userKey);
-                if (userDiv) {
-                    userDiv.textContent = messageData.message;
+                var userDiv = document.getElementById(messageData.userKey);
+                if (!userDiv){
+                    userDiv = document.createElement("div");
+                    userDiv.id = messageData.userKey;
+                    document.body.appendChild(userDiv);
                 }
+                userDiv.textContent = messageData.message;
             }
         };
 

@@ -1,16 +1,20 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <script>
         let username = "${name}";
-
+        let users = [
+        <#list users?keys as key>
+            "${key}",
+        </#list>
+        ];
         // Establish WebSocket connection
         const ws = new WebSocket("ws://localhost:3000/ws");
 
         ws.onopen = () => {
             console.log(`${name} is connected.`);
         };
-
         // Handle incoming messages
         ws.onmessage = (event) => {
             const messageData = JSON.parse(event.data);
@@ -21,7 +25,7 @@
                 if (!userDiv){
                     userDiv = document.createElement("div");
                     userDiv.id = messageData.userKey;
-                    document.body.appendChild(userDiv);
+                    document.getElementById("container").body.appendChild(userDiv);
                 }
                 userDiv.textContent = messageData.message;
             }
@@ -38,6 +42,29 @@
             });
             ws.send(message);
         }
+        function setPlayerView() {
+            const div_user = document.getElementById("user");
+            const div_userTopRight = document.getElementById("userTopRight");
+            const div_userTopLeft = document.getElementById("userTopLeft");
+
+            div_user.id = username;
+            div_userTopRight.id = users[0];
+            div_userTopLeft.id = users[1];
+
+            div_user.style.bottom = "0";
+            div_user.style.left = "50%";
+            div_user.style.transform = "translateX(-50%)";
+
+            div_userTopLeft.style.top = "0";
+            div_userTopLeft.style.left = "0";
+
+            div_userTopRight.style.top = "0";
+            div_userTopRight.style.right = "0";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setPlayerView();
+        });
     </script>
     <title>Dashboard</title>
 </head>
@@ -49,16 +76,12 @@
     <button type="submit">Raise Hand</button>
 </form>
 
-<!-- User List -->
-<#list users?keys as key>
-    <div id="${key}">
-        ${users[key].storedInfo}
-    </div>
-</#list>
-
-<!-- Logout Form -->
-<form action="/logout" method="post">
-    <button>Logout</button>
-</form>
+<div id="container">
+    <div id="user" class="user_div"></div>
+    <div id="userTopRight" class="user_div"></div>
+    <div id="userTopLeft" class="user_div"></div>
+<!-- User List
+-->
+</div>
 </body>
 </html>

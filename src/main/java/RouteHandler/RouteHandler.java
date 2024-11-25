@@ -29,8 +29,12 @@ public class RouteHandler {
                 return null;
             }
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("users",userRightsManager.getOnlineUsers());
+
             String name = request.session().attribute("username");
+            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
+            otherUsers.remove(name);
+            attributes.put("users",otherUsers);
+
             if (name != null) {
                 attributes.put("name", name);
             } else {

@@ -1,117 +1,22 @@
-/*Erstellt von Angelov*/
 body {
+    margin: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    justify-content: space-between;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    overflow: auto;
 }
-#text{
-    margin: 5%;
+
+#id {
+    position: relative;
+    flex-grow: 1;
 }
-button {
+
+.user_div {
+    position: absolute;
+    width: 40%;
+    height: 40%;
     background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 30px 40px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 24px;
-    margin: 20px 2px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: inline-block;
-    gap: 10px;
-}
-#disabledButton {
-    background-color: #989898;
-    border: none;
-    color: white;
-    padding: 30px 40px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 24px;
-    margin: 20px 2px;
-    cursor: pointer;
-    display: inline-block;
-    gap: 10px;
-}
-.disabledButton {
-    background-color: #989898;
-    border: none;
-    color: white;
-    padding: 30px 40px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 24px;
-    margin: 20px 2px;
-    cursor: pointer;
-    display: inline-block;
-    gap: 10px;
-}
-#red {
-    color: red;
-    display: none;
-}
-#orange {
-    color: orange;
-    display: none;
-}
-#yellow {
-    color: yellow;
-    display: none;
-}
-#blue {
-    color: blue;
-    display: none;
-}
-div {
-    width: 80%;
-    margin-left:40%
-}
-button:hover {
-    background-color: #1e5e21;
-}
-.disabledButton:hover{
-    background-color: #989898
-}
-ul {
-    list-style-type: none;
-    width: 80%;
-    margin: auto;
-    padding-top: 10%;
-    box-sizing: border-box;
-    overflow-y: auto;
-}
-li {
-    border: 1px solid #ddd;
-    margin: 0 -1px;
-    background-color: #f6f6f6;
-    padding: 12px;
-    text-align: center;
+    border: 2px solid #333;
 }
 
-p {
-    text-align: justify;
-}
-
-a:hover li {
-    background-color: #f0f0f0;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-.positive {
-    color: green;
-}
-
-.negative {
-    color: red;
-}
-.neutral {
-    color: grey;
-}

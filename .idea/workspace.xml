@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="implemented some game logic/classes on java side and some webdesign on front end">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +45,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -54,6 +53,8 @@
     "WebServerToolWindowFactoryState": "false",
     "dynamic.classpath": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/kucem/IdeaProjects/web_testing/src/main/resources/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

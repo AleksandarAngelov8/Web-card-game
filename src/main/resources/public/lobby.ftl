@@ -91,7 +91,10 @@
 
 <script>
     const username = "${name}";
-    const ws = new WebSocket("ws://192.168.0.45:3000/ws");
+    const wsURL = window.location.hostname === 'localhost'
+        ? "ws://localhost:3000/ws"
+        : "ws://91.139.20.23:3000/ws";
+    const ws = new WebSocket(wsURL);
 
     ws.onopen = () => {
         const message = JSON.stringify({type: "join", username: username});

@@ -1,5 +1,6 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 3000 });
+
+const wss = new WebSocket.Server({ host: '0.0.0.0', port: 3000 });
 
 let communicationToken;
 
@@ -15,6 +16,7 @@ function handShakeWithJavaServer(){
 handShakeWithJavaServer();
 
 wss.on('connection', (ws) => {
+
     ws.on('message', (message) => {
         const data = JSON.parse(message);
 
@@ -22,7 +24,6 @@ wss.on('connection', (ws) => {
             const username = data.username;
             const info = data.username + ' raised their hand';
             console.log(info);
-
 
             broadcast({
                 type: "update_user",
@@ -42,6 +43,15 @@ wss.on('connection', (ws) => {
                 }
             });
         }
+        else if (data.type === "join"){
+            const username = data.username;
+            broadcast({type: "join", user:username});
+        }
+        else if (data.type === "chatMessage"){
+            const username = data.username;
+            const message = data.text;
+            broadcast({type:"chatMessage",user:username,text:message});
+        }
     });
 
     ws.on('close', () => {
@@ -58,4 +68,4 @@ function broadcast(data) {
     });
 }
 
-console.log("WebSocket server running on ws://localhost:3000");
+console.log(`WebSocket server running on ws://buzzword:3000`);

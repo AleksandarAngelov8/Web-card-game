@@ -103,7 +103,7 @@ public class RouteHandler {
                 request.session().attribute("sessionToken", sessionToken);
                 request.session().attribute("username", username);
 
-                response.redirect("/dashboard");
+                response.redirect("/lobby");
             } else {
                 response.redirect("/login?error=true");
             }
@@ -144,7 +144,33 @@ public class RouteHandler {
             }
             return NodeJsServerRunner.communicationToken;
         });
+        get("/lobby",(request, response) -> {
+            if (!isValidSessionToken(request)) {
+                response.redirect("/login");
+                return null;
+            }
+            Map<String, Object> attributes = new HashMap<>();
 
+            String name = request.session().attribute("username");
+            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
+            otherUsers.remove(name);
+            attributes.put("users",otherUsers);
+
+            if (name != null) {
+                attributes.put("name", name);
+            } else {
+                attributes.put("name", "Guest");
+            }
+
+            StringWriter writer = new StringWriter();
+            try {
+                Template dashboardTemplate = configuration.getTemplate("lobby.ftl");
+                dashboardTemplate.process(attributes, writer);
+            } catch (Exception e) {
+                halt(500);
+            }
+            return writer.toString();
+        });
 
     }
     private static boolean isValidSessionToken(spark.Request request) {

@@ -87,21 +87,33 @@
             <button type="submit">Send</button>
         </form>
     </div>
+    <button type= "submit" id="startButton" onclick="startGame()" disabled>Start</button>
 </div>
 
 <script>
+    addEventListener("close", (event) => {});
+
     const username = "${name}";
+    let leader = "";
+    const playerList = document.getElementById('player-list');
+    const chat = document.getElementById('chat');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const maxPlayers = 3;
+    let players = [
+    ];
+
     const wsURL = window.location.hostname === 'localhost'
         ? "ws://localhost:3000/ws"
         : "ws://91.139.20.23:3000/ws";
     const ws = new WebSocket(wsURL);
-
     ws.onopen = () => {
         const message = JSON.stringify({type: "join", username: username});
         ws.send(message);
     };
     // Handle incoming messages
     ws.onmessage = (event) => {
+        console.log(players);
         const messageData = JSON.parse(event.data);
 
         // Dynamically update user info
@@ -114,34 +126,46 @@
             }
             userDiv.textContent = messageData.message;
         }
-
         else if (messageData.type === "join"){
             const user = messageData.user;
-            addChatMessage(user +' is connected.');
+            addChatMessage(user +' has been resurrected.');
+            updatePlayerList();
         }
-
         else if (messageData.type === "chatMessage"){
             const user = messageData.user;
             const you = (username === user)?" (you)":"";
             const message = messageData.text;
             addChatMessage(message, user + you);
         }
+        else if (messageData.type === "leave"){
+            const user = messageData.user;
+            addChatMessage(user +' killed themselves.');
+            players.splice(players.indexOf(user),1);
+            updatePlayerList();
+        }
+        else if (messageData.type === "setLeader"){
+            leader = messageData.leader;
+            if (leader === username){
+                document.getElementById("startButton").disabled = false;
+            }
+            else {
+                document.getElementById("startButton").disabled = true;
+            }
+            updatePlayerList();
+        }
+        else if (messageData.type === "setUsers"){
+            players = Array.from(messageData.users);
+        }
     };
 
-    const playerList = document.getElementById('player-list');
-    const chat = document.getElementById('chat');
-    const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
 
-    const players = ['Player 1', 'Player 2']; // Example players
-    const maxPlayers = 3;
 
     // Function to update player list
     function updatePlayerList() {
         playerList.innerHTML = '';
         players.forEach(player => {
             const li = document.createElement('li');
-            li.textContent = player;
+            li.textContent = ((player===leader?"♕":"") + player);
             playerList.appendChild(li);
         });
 
@@ -174,11 +198,13 @@
         }
     });
 
-
-
     updatePlayerList();
 
-
+    function startGame(){
+        const message = JSON.stringify({type: "startGame"});//could add some additional settings here, e.g. rounds etc.
+        ws.send(message);
+    }
 </script>
+
 </body>
 </html>

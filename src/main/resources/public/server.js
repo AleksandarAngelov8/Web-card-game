@@ -24,54 +24,79 @@ function handShakeWithJavaServer() {
 }
 handShakeWithJavaServer();
 
-wss.on('connection', (ws) => {
-    ws.on('message', (message) => {
+const clients = new Map();
+let leader = "";
+const messageHandlers = {
+    join(ws, data) {
+        const username = data.username;
+        if (clients.size === 0) {
+            leader = username;
+            console.log("Set leader:", leader);
+        }
+        clients.set(ws, username);
+
+        broadcast({ type: "setLeader", leader: leader });
+        const users = Array.from(clients.values());
+        broadcast({ type: "setUsers", users: users });
+        broadcast({ type: "join", user: username });
+    },
+    raise_hand(ws, data) {
+        const username = data.username;
+        const info = `${username} raised their hand`;
+        console.log(info);
+
+        broadcast({
+            type: "update_user",
+            userKey: username,
+            message: info,
+        });
+
+        sendToJava({ username, token: communicationToken, info });
+    },
+    chatMessage(ws, data) {
+        const username = data.username;
+        const message = data.text;
+        broadcast({ type: "chatMessage", user: username, text: message });
+    },
+    startGame(ws, data) {
+        console.log("Starting game...");
+    },
+};
+
+wss.on("connection", (ws) => {
+    ws.on("message", (message) => {
         let data;
         try {
             data = JSON.parse(message);
         } catch (e) {
-            console.error('Invalid JSON:', e);
+            console.error("Invalid JSON:", e);
             return;
         }
 
-        if (data.type === "raise_hand") {
-            const username = data.username;
-            const info = `${username} raised their hand`;
-            console.log(info);
-
-            broadcast({
-                type: "update_user",
-                userKey: username,
-                message: info
-            });
-
-            fetch(`http://${JAVA_SERVER_HOST}:4567/update_info`, {
-                method: "POST",
-                body: JSON.stringify({
-                    username,
-                    token: communicationToken,
-                    info
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).catch(error => console.error('Error updating info:', error));
-        }
-        else if (data.type === "join"){
-            const username = data.username;
-            broadcast({ type: "join", user: username });
-        }
-        else if (data.type === "chatMessage"){
-            const username = data.username;
-            const message = data.text;
-            broadcast({ type: "chatMessage", user: username, text: message });
+        // Delegate to the appropriate handler based on message type
+        const handler = messageHandlers[data.type];
+        if (handler) {
+            handler(ws, data);
+        } else {
+            console.error(`Unknown message type: ${data.type}`);
         }
     });
-
     ws.on('close', () => {
-        console.log('A client disconnected');
+        const username = clients.get(ws);
+        console.log(username + ' has disconnected');
+        broadcast({type: "leave", user: username});
+        clients.delete(ws);
+        if (username === leader){
+            for (const client of clients.keys()){
+                leader = clients.get(client);
+                break;
+            }
+            broadcast({type: "setLeader", leader});
+        }
     });
 });
+
+
 
 function broadcast(data) {
     const message = JSON.stringify(data);
@@ -81,7 +106,15 @@ function broadcast(data) {
         }
     });
 }
-
+function sendToJava(data){
+    fetch(`http://${JAVA_SERVER_HOST}:4567/update_info`, {
+        method: "POST",
+        body: data,
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }).catch(error => console.error('Error updating info:', error));
+}
 // Utility to get local IP addresses
 function getNetworkAddresses() {
     const interfaces = os.networkInterfaces();

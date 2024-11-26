@@ -80,7 +80,7 @@ public class RouteHandler {
         });
         get("/login", (request, response) -> {
             if (isValidSessionToken(request)) {
-                response.redirect("/dashboard");
+                response.redirect("/lobby");
                 return null;
             }
             Map<String, Object> attributes = new HashMap<>();

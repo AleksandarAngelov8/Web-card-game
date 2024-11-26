@@ -112,51 +112,60 @@
         ws.send(message);
     };
     // Handle incoming messages
+    const messageHandlers = {
+        update_user(messageData) {
+            let userDiv = document.getElementById(messageData.userKey);
+            if (!userDiv) {
+                userDiv = document.createElement("div");
+                userDiv.id = messageData.userKey;
+                document.getElementById("container").appendChild(userDiv);
+            }
+            userDiv.textContent = messageData.message;
+        },
+        join(messageData) {
+            const user = messageData.user;
+            addChatMessage(user + " has been resurrected.");
+            updatePlayerList();
+        },
+        chatMessage(messageData) {
+            const user = messageData.user;
+            const you = username === user ? " (you)" : "";
+            const message = messageData.text;
+            addChatMessage(message, user + you);
+        },
+        leave(messageData) {
+            const user = messageData.user;
+            addChatMessage(user + " killed themselves.");
+            players.splice(players.indexOf(user), 1);
+            updatePlayerList();
+        },
+        setLeader(messageData) {
+            leader = messageData.leader;
+            document.getElementById("startButton").disabled = leader !== username;
+            updatePlayerList();
+        },
+        setUsers(messageData) {
+            players = Array.from(messageData.users);
+        },
+        startGame(messageData){
+            window.location.href="http://localhost:4567/dashboard";
+        }
+    };
+
+    // WebSocket message handler
     ws.onmessage = (event) => {
         console.log(players);
         const messageData = JSON.parse(event.data);
 
-        // Dynamically update user info
-        if (messageData.type === "update_user") {
-            var userDiv = document.getElementById(messageData.userKey);
-            if (!userDiv){
-                userDiv = document.createElement("div");
-                userDiv.id = messageData.userKey;
-                document.getElementById("container").body.appendChild(userDiv);
-            }
-            userDiv.textContent = messageData.message;
-        }
-        else if (messageData.type === "join"){
-            const user = messageData.user;
-            addChatMessage(user +' has been resurrected.');
-            updatePlayerList();
-        }
-        else if (messageData.type === "chatMessage"){
-            const user = messageData.user;
-            const you = (username === user)?" (you)":"";
-            const message = messageData.text;
-            addChatMessage(message, user + you);
-        }
-        else if (messageData.type === "leave"){
-            const user = messageData.user;
-            addChatMessage(user +' killed themselves.');
-            players.splice(players.indexOf(user),1);
-            updatePlayerList();
-        }
-        else if (messageData.type === "setLeader"){
-            leader = messageData.leader;
-            if (leader === username){
-                document.getElementById("startButton").disabled = false;
-            }
-            else {
-                document.getElementById("startButton").disabled = true;
-            }
-            updatePlayerList();
-        }
-        else if (messageData.type === "setUsers"){
-            players = Array.from(messageData.users);
+        // Delegate to the appropriate handler based on message type
+        const handler = messageHandlers[messageData.type];
+        if (handler) {
+            handler(messageData);
+        } else {
+            console.error('Unknown message type:' + messageData.type);
         }
     };
+
 
 
 

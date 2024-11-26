@@ -59,8 +59,8 @@ const messageHandlers = {
         broadcast({ type: "chatMessage", user: username, text: message });
     },
     startGame(ws, data) {
-        console.log("Starting game...");
-    },
+        broadcast({ type: "startGame"});
+    }
 };
 
 wss.on("connection", (ws) => {
@@ -73,7 +73,6 @@ wss.on("connection", (ws) => {
             return;
         }
 
-        // Delegate to the appropriate handler based on message type
         const handler = messageHandlers[data.type];
         if (handler) {
             handler(ws, data);
@@ -115,7 +114,6 @@ function sendToJava(data){
         }
     }).catch(error => console.error('Error updating info:', error));
 }
-// Utility to get local IP addresses
 function getNetworkAddresses() {
     const interfaces = os.networkInterfaces();
     const addresses = [];

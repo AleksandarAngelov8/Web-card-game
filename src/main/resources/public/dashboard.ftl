@@ -65,9 +65,21 @@
         const div_userTopRight = document.getElementById("userTopRight");
         const div_userTopLeft = document.getElementById("userTopLeft");
 
-        div_user.id = username;
-        div_userTopRight.id = users[0];
-        div_userTopLeft.id = users[1];
+        if (users.indexOf(username) === 0){
+            div_user.id = username;
+            div_userTopRight.id = users[1];
+            div_userTopLeft.id = users[2];
+        }
+        else if (users.indexOf(username) === 1){
+            div_user.id = username;
+            div_userTopRight.id = users[2];
+            div_userTopLeft.id = users[0];
+        }
+        else {
+            div_user.id = username;
+            div_userTopRight.id = users[0];
+            div_userTopLeft.id = users[1];
+        }
 
         div_user.style.bottom = "0";
         div_user.style.left = "50%";

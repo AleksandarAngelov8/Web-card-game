@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="implemented some game logic/classes on java side and some webdesign on front end">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="fixing some bugs with chat">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/dashboard.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
     </list>
@@ -61,6 +63,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -282,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732556536323</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fixing some bugs with chat">
+      <option name="closed" value="true" />
+      <created>1732625439828</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732625439828</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,7 +321,9 @@
     <MESSAGE value="added jetty support also possible node.js support if i decide to try different implementations of the server realtime communication" />
     <MESSAGE value="removed jetty support because it sux lol&#10;handshake node.js server and java server&#10;ready for work on the game" />
     <MESSAGE value="implemented some game logic/classes on java side and some webdesign on front end" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented some game logic/classes on java side and some webdesign on front end" />
+    <MESSAGE value="life update, killing myself postponed to yesterday" />
+    <MESSAGE value="fixing some bugs with chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs with chat" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

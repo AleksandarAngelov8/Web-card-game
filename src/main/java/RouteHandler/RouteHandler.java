@@ -32,7 +32,6 @@ public class RouteHandler {
 
             String name = request.session().attribute("username");
             Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
-            otherUsers.remove(name);
             attributes.put("users",otherUsers);
 
             if (name != null) {

@@ -83,6 +83,7 @@ wss.on("connection", (ws) => {
     ws.on('close', () => {
         const username = clients.get(ws);
         console.log(username + ' has disconnected');
+
         broadcast({type: "leave", user: username});
         clients.delete(ws);
         if (username === leader){

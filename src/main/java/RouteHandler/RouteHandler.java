@@ -23,32 +23,6 @@ public class RouteHandler {
         configuration.setClassForTemplateLoading(org.apache.ivy.Main.class, "/public");
 
 
-        get("/dashboard", (request, response) -> {
-            if (!isValidSessionToken(request)) {
-                response.redirect("/login");
-                return null;
-            }
-            Map<String, Object> attributes = new HashMap<>();
-
-            String name = request.session().attribute("username");
-            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
-            attributes.put("users",otherUsers);
-
-            if (name != null) {
-                attributes.put("name", name);
-            } else {
-                attributes.put("name", "Guest");
-            }
-
-            StringWriter writer = new StringWriter();
-            try {
-                Template dashboardTemplate = configuration.getTemplate("dashboard.ftl");
-                dashboardTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                halt(500);
-            }
-            return writer.toString();
-        });
         post("/raise_hand", (request, response) -> {
             if (!isValidSessionToken(request)) return null;
             String name = request.queryParams("name");
@@ -170,7 +144,18 @@ public class RouteHandler {
             }
             return writer.toString();
         });
-
+        get("/webSocket",(request, response) -> {
+            response.type("application/javascript");
+            Map<String, Object> attributes = new HashMap<>();
+            StringWriter writer = new StringWriter();
+            try {
+                Template representativesTemplate = configuration.getTemplate("websocket.js");
+                representativesTemplate.process(attributes, writer);
+            } catch (Exception e) {
+                halt(500);
+            }
+            return writer;
+        });
     }
     private static boolean isValidSessionToken(spark.Request request) {
         String username = request.session().attribute("username");

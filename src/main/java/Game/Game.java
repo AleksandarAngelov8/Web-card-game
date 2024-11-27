@@ -1,5 +1,6 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -7,6 +8,7 @@ public class Game {
     Round currentRound;
     List<Player> players;
     public Game(List<String> usernames, int tR){
+        players = new ArrayList();
         for (int i = 0; i < usernames.size(); i++){
             Player player = new Player(usernames.get(i));
             players.add(player);
@@ -25,6 +27,7 @@ public class Game {
         currentRound = new Round(this);
     }
     public void PrintPlayers(){
+        System.out.println("Printing players:");
         System.out.println(players);
     }
 }

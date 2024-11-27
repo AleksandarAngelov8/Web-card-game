@@ -1,17 +1,54 @@
 import { ws, sendMessage } from './web_socket';
-
+let gameStarted = "";
+let username = document.location.href.substring(document.location.href.indexOf("?")+1);
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
-
-const username = document.getElementById("name").innerText;
 let leader = "";
 const playerList = document.getElementById('player-list');
 const chat = document.getElementById('chat');
 const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
 const maxPlayers = 3;
+const div_user = document.getElementById("user");
+const div_userTopRight = document.getElementById("userTopRight");
+const div_userTopLeft = document.getElementById("userTopLeft");
+
 let players = [
 ];
+function scheduleDataLoad(){
+    if (ws.readyState === WebSocket.CONNECTING){
+        ws.addEventListener("open", function sendMessageOnOpen() {
+            loadGameData();
+            ws.removeEventListener("open", sendMessageOnOpen); // Clean up the listener
+        });
+    }else{
+        loadGameData();
+    }
+}
+function loadGameData(){
+    fetch('game_data/'+username)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            gameStarted = data.gameStarted;
+            username = data.name;
+            players = data.users;
+            if (gameStarted === "1"){
+                loadGameState();
+            }
+            else{
+                divLobby.style.display = "inline";
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+scheduleDataLoad();
 
 // Handle incoming messages
 const messageHandlers = {
@@ -25,8 +62,7 @@ const messageHandlers = {
         userDiv.textContent = messageData.message;
     },
     join(messageData) {
-        const user = messageData.user;
-        addChatMessage(user + " has been resurrected.");
+        addChatMessage(username + " has been resurrected.");
         updatePlayerList();
     },
     chatMessage(messageData) {
@@ -43,18 +79,18 @@ const messageHandlers = {
     },
     setLeader(messageData) {
         leader = messageData.leader;
-        document.getElementById("startButton").disabled = leader !== username;
         updatePlayerList();
     },
     setUsers(messageData) {
         players = Array.from(messageData.users);
-        console.log("Players: "+players);
+        document.getElementById("startButton").disabled = (leader !== username || players.length !== 3);
+        console.log("Number of players: " + players.length);
+        console.log("Leader: " + leader);
+        console.log("Username: " + username);
     },
     startGame(messageData){
         divLobby.style.display = "none";
         divGame.style.display = "block";
-        users = players;
-        //console.log("users: "+users);
         setPlayerView();
     }
 };
@@ -104,9 +140,19 @@ function addChatMessage(message, sender = 'System') {
 updatePlayerList();
 function startGame(){
     const message = JSON.stringify({type: "startGame"});//could add some additional settings here, e.g. rounds etc.
-    ws.send(message);
+    if (ws.readyState === WebSocket.CONNECTING){
+        ws.addEventListener("open", function sendMessageOnOpen() {
+            ws.send(message);
+            console.log("Message sent after WebSocket opened.");
+            ws.removeEventListener("open", sendMessageOnOpen); // Clean up the listener
+        });
+    }else{
+        ws.send(message);
+    }
 }
-window.startGame = startGame
+window.startGame = startGame;
+
+
 
 //---------------------------------------------------------//--------------------------------------------------------- dashboard.js
 
@@ -117,33 +163,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-let users = document.getElementById("users").innerText.trim();
-if (users.length > 0){
-    console.log(users);
-    users = users.substring(0,document.getElementById("users").innerText.length-6).split(",");
+function loadGameState(){
+    divLobby.style.display = "none";
+    divGame.style.display = "inline";
+    setPlayerView();
 }
-
 // Establish WebSocket connection
 
 function setPlayerView() {
-    const div_user = document.getElementById("user");
-    const div_userTopRight = document.getElementById("userTopRight");
-    const div_userTopLeft = document.getElementById("userTopLeft");
 
-    if (users.indexOf(username) === 0){
+    if (players.indexOf(username) === 0){
         div_user.id = username;
-        div_userTopRight.id = users[1];
-        div_userTopLeft.id = users[2];
+        div_userTopRight.id = players[1];
+        div_userTopLeft.id = players[2];
     }
-    else if (users.indexOf(username) === 1){
+    else if (players.indexOf(username) === 1){
         div_user.id = username;
-        div_userTopRight.id = users[2];
-        div_userTopLeft.id = users[0];
+        div_userTopRight.id = players[2];
+        div_userTopLeft.id = players[0];
     }
     else {
         div_user.id = username;
-        div_userTopRight.id = users[0];
-        div_userTopLeft.id = users[1];
+        div_userTopRight.id = players[0];
+        div_userTopLeft.id = players[1];
     }
 
     div_user.style.bottom = "0";

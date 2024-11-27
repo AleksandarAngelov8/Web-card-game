@@ -50,16 +50,38 @@ public class RouteHandler {
             otherUsers.remove(name);
             attributes.put("users", otherUsers);
             attributes.put("name", name != null ? name : "Guest");
+            attributes.put("gameStarted", (game != null)?"1":"0");
 
             return renderTemplate(configuration, "lobby.ftl", attributes);
         });
-
         get("/web_socket", (request, response) -> {
             response.type("application/javascript");
             Map<String, Object> attributes = new HashMap<>();
             return renderTemplate(configuration, "websocket.js", attributes);
         });
+        get("/game_data/:name", (request, response) -> {
+            if (!isValidSessionToken(request)) {
+                response.redirect("/login");
+                return null;
+            }
+            Gson gson = new Gson();
+            String urlName = request.params(":name");
+            String connectingName = request.session().attribute("username");
+            if (!urlName.equals(connectingName)){
+                return "Nuh uh";
+            }
+            response.type("application/json");
 
+            Map<String, Object> data = new HashMap<>();
+            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
+            otherUsers.remove(urlName);
+            data.put("users", otherUsers.keySet());
+            data.put("name", urlName);
+            data.put("gameStarted", (game != null)?"1":"0");
+            // Convert map to JSON string
+
+            return gson.toJson(data);
+        });
         get("/hand_shake", (request, response) -> {
             if (NodeJsServerRunner.communicationToken == null){
                 NodeJsServerRunner.communicationToken = UUID.randomUUID().toString();
@@ -69,7 +91,6 @@ public class RouteHandler {
             }
             return NodeJsServerRunner.communicationToken;
         });
-
         post("/raise_hand", (request, response) -> {
             if (!isValidSessionToken(request)) return null;
             String name = request.queryParams("name");
@@ -108,7 +129,7 @@ public class RouteHandler {
                 request.session().attribute("sessionToken", sessionToken);
                 request.session().attribute("username", username);
 
-                response.redirect("/lobby");
+                response.redirect("/lobby?"+username);
             } else {
                 response.redirect("/login?error=true");
             }
@@ -142,12 +163,12 @@ public class RouteHandler {
                 Map bodyAttributes = new Gson().fromJson(body, Map.class);
                 if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
 
-
                 game = new Game(List.copyOf(userRightsManager.getOnlineUsers().keySet()), 1);
-                game.PrintPlayers();
             } catch (JsonSyntaxException e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
                 halt(400, "Invalid JSON format");
+            } catch (Exception e){
+                e.printStackTrace();
             }
             return null;
 
@@ -156,7 +177,13 @@ public class RouteHandler {
     private static boolean isValidSessionToken(spark.Request request) {
         String username = request.session().attribute("username");
         User user = userRightsManagerLocal.getUsers().get(username);
-        return user != null &&
+        try{
+            System.out.println("Session token here is: " + user.sessionToken);
+            System.out.println("Session token there is: " + request.session().attribute("sessionToken"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+         return user != null &&
                 user.sessionToken != null &&
                 user.sessionToken.equals(request.session().attribute("sessionToken")) &&
                 !user.sessionToken.isEmpty();

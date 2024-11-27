@@ -10,10 +10,12 @@ public class Player {
     boolean alive;
     public Player(String n){
         Random random = new Random();
-        gunLoadout[random.nextInt()%6] = true;
+        int activeBullet = Math.abs(random.nextInt()%6);
+        gunLoadout[activeBullet] = true;
         name = n;
         currentBullet = 0;
         alive = true;
+        //System.out.println(name + ": " + activeBullet);
     }
     public void SetNeighbours(Player pp,Player np){
         previousPlayer = pp;

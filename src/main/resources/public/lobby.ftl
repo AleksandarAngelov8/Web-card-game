@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobby Waiting Room</title>
+    <title>Gaym</title>
 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<p style="display: none" id="name">${name}</p>
-<div id="lobby">
+
+<div id="lobby" style="display: none">
     <h2>Lobby Waiting Room</h2>
     <p>Waiting for players to join...</p>
     <ul id="player-list">

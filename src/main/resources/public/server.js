@@ -38,7 +38,7 @@ const messageHandlers = {
 
         broadcast({ type: "setLeader", leader: leader });
         const users = Array.from(clients.values());
-        broadcast({ type: "setUsers", users: users });
+        broadcast({ type: "setUsers", users: users});
         broadcast({ type: "join", user: username });
     },
     raise_hand(ws, data) {

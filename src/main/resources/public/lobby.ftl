@@ -27,7 +27,7 @@
 <div id="game" style="display: none">
     <p style="display: none" id="users"><#list users?keys as key>${key},</#list>
     </p>
-    <h1>Welcome to the Dashboard, ${name}!</h1>
+    <h2>Welcome to the Dashboard, ${name}!</h2>
 
     <!-- Button to raise hand -->
 

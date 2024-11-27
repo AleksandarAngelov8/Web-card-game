@@ -1,4 +1,4 @@
-import { ws, sendMessage } from './webSocket';
+import { ws, sendMessage } from './web_socket';
 
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
@@ -54,7 +54,7 @@ const messageHandlers = {
         divLobby.style.display = "none";
         divGame.style.display = "block";
         users = players;
-        console.log("users: "+users);
+        //console.log("users: "+users);
         setPlayerView();
     }
 };

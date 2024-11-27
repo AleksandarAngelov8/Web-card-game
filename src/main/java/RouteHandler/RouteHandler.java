@@ -1,27 +1,74 @@
 package RouteHandler;
 
+import Game.Game;
 import UserRightsManager.UserRightsManager;
 import UserRightsManager.User;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 import java.io.StringWriter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import NodeJsServer.NodeJsServerRunner;
+import org.apache.ivy.Main;
+
 import static spark.Spark.*;
 
 public class RouteHandler {
+    static Game game;
     static private UserRightsManager userRightsManagerLocal;
     static public void SetupRoutes(UserRightsManager userRightsManager){
+
         userRightsManagerLocal = userRightsManager;
         ipAddress("0.0.0.0");
         port(4567);
         staticFileLocation("/public");
         final Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
-        configuration.setClassForTemplateLoading(org.apache.ivy.Main.class, "/public");
+        configuration.setClassForTemplateLoading(Main.class, "/public");
 
+        get("/login", (request, response) -> {
+            if (isValidSessionToken(request)) {
+                response.redirect("/lobby");
+                return null;
+            }
+            Map<String, Object> attributes = new HashMap<>();
+            return renderTemplate(configuration, "login.html", attributes);
+        });
+
+        get("/lobby", (request, response) -> {
+            if (!isValidSessionToken(request)) {
+                response.redirect("/login");
+                return null;
+            }
+
+            Map<String, Object> attributes = new HashMap<>();
+            String name = request.session().attribute("username");
+            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
+            otherUsers.remove(name);
+            attributes.put("users", otherUsers);
+            attributes.put("name", name != null ? name : "Guest");
+
+            return renderTemplate(configuration, "lobby.ftl", attributes);
+        });
+
+        get("/web_socket", (request, response) -> {
+            response.type("application/javascript");
+            Map<String, Object> attributes = new HashMap<>();
+            return renderTemplate(configuration, "websocket.js", attributes);
+        });
+
+        get("/hand_shake", (request, response) -> {
+            if (NodeJsServerRunner.communicationToken == null){
+                NodeJsServerRunner.communicationToken = UUID.randomUUID().toString();
+                request.session().attribute("communicationToken",NodeJsServerRunner.communicationToken);
+
+                System.out.println("Communication token has been set!");
+            }
+            return NodeJsServerRunner.communicationToken;
+        });
 
         post("/raise_hand", (request, response) -> {
             if (!isValidSessionToken(request)) return null;
@@ -51,21 +98,6 @@ public class RouteHandler {
             response.type("application/json");
             return new Gson().toJson(jsonResponse);
         });
-        get("/login", (request, response) -> {
-            if (isValidSessionToken(request)) {
-                response.redirect("/lobby");
-                return null;
-            }
-            Map<String, Object> attributes = new HashMap<>();
-            StringWriter writer = new StringWriter();
-            try {
-                Template representativesTemplate = configuration.getTemplate("login.html");
-                representativesTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                halt(500);
-            }
-            return writer;
-        });
         post("/login", (request, response) -> {
             String username = request.queryParams("username");
             String password = request.queryParams("password");
@@ -89,72 +121,36 @@ public class RouteHandler {
             response.redirect("/login");
             return null;
         });
-        get("/websocket",(request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            StringWriter writer = new StringWriter();
-            try {
-                Template representativesTemplate = configuration.getTemplate("index.html");
-                representativesTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                halt(500);
-            }
-            return writer;
-        });
         post("/update_info", (request, response) -> {
-            String json = request.body();
-            Map bodyAttributes = new Gson().fromJson(json, Map.class);
-            if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
-            String name = bodyAttributes.get("username").toString();
-            userRightsManager.getUsers().get(name).setStoredInfo(bodyAttributes.get("info").toString());
+            String body = request.body();
+            try {
+                Map bodyAttributes = new Gson().fromJson(body, Map.class);
+                if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
+
+                String name = bodyAttributes.get("username").toString();
+                userRightsManager.getUsers().get(name).setStoredInfo(bodyAttributes.get("info").toString());
+
+            } catch (JsonSyntaxException e) {
+                System.err.println("Error parsing JSON: " + e.getMessage());
+                halt(400, "Invalid JSON format");
+            }
             return null;
         });
-        get("/hand_shake", (request, response) -> {
-            if (NodeJsServerRunner.communicationToken == null){
-                NodeJsServerRunner.communicationToken = UUID.randomUUID().toString();
-                request.session().attribute("communicationToken",NodeJsServerRunner.communicationToken);
-
-                System.out.println("Communication token has been set!");
-            }
-            return NodeJsServerRunner.communicationToken;
-        });
-        get("/lobby",(request, response) -> {
-            if (!isValidSessionToken(request)) {
-                response.redirect("/login");
-                return null;
-            }
-            Map<String, Object> attributes = new HashMap<>();
-
-            String name = request.session().attribute("username");
-            Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
-            otherUsers.remove(name);
-            attributes.put("users",otherUsers);
-
-            if (name != null) {
-                attributes.put("name", name);
-            } else {
-                attributes.put("name", "Guest");
-            }
-
-            StringWriter writer = new StringWriter();
+        post("/start_game", (request, response) -> {
+            String body = request.body();
             try {
-                Template dashboardTemplate = configuration.getTemplate("lobby.ftl");
-                dashboardTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                halt(500);
+                Map bodyAttributes = new Gson().fromJson(body, Map.class);
+                if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
+
+
+                game = new Game(List.copyOf(userRightsManager.getOnlineUsers().keySet()), 1);
+                game.PrintPlayers();
+            } catch (JsonSyntaxException e) {
+                System.err.println("Error parsing JSON: " + e.getMessage());
+                halt(400, "Invalid JSON format");
             }
-            return writer.toString();
-        });
-        get("/webSocket",(request, response) -> {
-            response.type("application/javascript");
-            Map<String, Object> attributes = new HashMap<>();
-            StringWriter writer = new StringWriter();
-            try {
-                Template representativesTemplate = configuration.getTemplate("websocket.js");
-                representativesTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                halt(500);
-            }
-            return writer;
+            return null;
+
         });
     }
     private static boolean isValidSessionToken(spark.Request request) {
@@ -166,6 +162,20 @@ public class RouteHandler {
                 !user.sessionToken.isEmpty();
     }
     private static boolean isValidCommunicationToken(String jsCommunicationToken){
+        if (!jsCommunicationToken.equals(NodeJsServerRunner.communicationToken)){
+            System.out.println("Incorrect communication token.");
+        }
         return jsCommunicationToken.equals(NodeJsServerRunner.communicationToken);
     }
+    private static String renderTemplate(Configuration configuration, String templateName, Map<String, Object> attributes) {
+        StringWriter writer = new StringWriter();
+        try {
+            Template template = configuration.getTemplate(templateName);
+            template.process(attributes, writer);
+        } catch (Exception e) {
+            halt(500, "Template rendering failed: " + e.getMessage());
+        }
+        return writer.toString();
+    }
+
 }

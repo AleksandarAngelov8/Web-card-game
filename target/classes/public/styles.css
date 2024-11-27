@@ -1,12 +1,83 @@
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     background-color: #f0f0f0;
 }
 
+#lobby {
+    max-width: 600px;
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+#player-list {
+    list-style: none;
+    padding: 0;
+}
+
+#player-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#player-list li:last-child {
+    border-bottom: none;
+}
+
+#chat-container {
+    margin-top: 20px;
+}
+
+#chat {
+    height: 150px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+#chat p {
+    margin: 5px 0;
+}
+
+#chat-form {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chat-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+}
+
+#chat-form button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+#chat-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styles */
 #id {
     position: relative;
     flex-grow: 1;
@@ -20,3 +91,8 @@ body {
     border: 2px solid #333;
 }
 
+#raiseHand{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

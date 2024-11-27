@@ -19,6 +19,8 @@ function handShakeWithJavaServer() {
     .then(token => {
         communicationToken = token;
         console.log('Handshake successful, token:', communicationToken);
+        console.log();
+        console.log();
     })
     .catch(error => console.error('Error during handshake:', error));
 }
@@ -31,7 +33,6 @@ const messageHandlers = {
         const username = data.username;
         if (clients.size === 0) {
             leader = username;
-            console.log("Set leader:", leader);
         }
         clients.set(ws, username);
 
@@ -51,7 +52,7 @@ const messageHandlers = {
             message: info,
         });
 
-        sendToJava({ username, token: communicationToken, info });
+        sendToJava("update_info",{ username:username,  info:info });
     },
     chatMessage(ws, data) {
         const username = data.username;
@@ -59,6 +60,7 @@ const messageHandlers = {
         broadcast({ type: "chatMessage", user: username, text: message });
     },
     startGame(ws, data) {
+        sendToJava("start_game");
         broadcast({ type: "startGame"});
     }
 };
@@ -82,7 +84,7 @@ wss.on("connection", (ws) => {
     });
     ws.on('close', () => {
         const username = clients.get(ws);
-        console.log(username + ' has disconnected');
+        //console.log(username + ' has disconnected');
 
         broadcast({type: "leave", user: username});
         clients.delete(ws);
@@ -106,10 +108,11 @@ function broadcast(data) {
         }
     });
 }
-function sendToJava(data){
-    fetch(`http://${JAVA_SERVER_HOST}:4567/update_info`, {
+function sendToJava(route,data={}){
+    data.token = communicationToken;
+    fetch(`http://${JAVA_SERVER_HOST}:4567/` + route, {
         method: "POST",
-        body: data,
+        body: JSON.stringify(data),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }

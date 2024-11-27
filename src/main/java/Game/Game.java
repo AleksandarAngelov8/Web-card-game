@@ -24,5 +24,7 @@ public class Game {
         if (roundNumber > totalRounds) return;//finish game
         currentRound = new Round(this);
     }
-
+    public void PrintPlayers(){
+        System.out.println(players);
+    }
 }

@@ -3,6 +3,8 @@ let gameStarted = "";
 let username = document.location.href.substring(document.location.href.indexOf("?")+1);
 let leader = "";
 let playersTurn = "";
+let cards;
+let selectedCards = [];
 
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
@@ -14,6 +16,8 @@ const maxPlayers = 3;
 const div_user = document.getElementById("user");
 const div_userTopRight = document.getElementById("userTopRight");
 const div_userTopLeft = document.getElementById("userTopLeft");
+const playHandButton = document.getElementById("playHand");
+const cardsDiv = document.getElementById("cardsDiv");
 
 let players = [
 ];
@@ -45,9 +49,11 @@ function loadGameData(){
             else{
                 divLobby.style.display = "inline";
             }
-            console.log("Game started: " + gameStarted);
             playersTurn = data.playersTurn;
-            console.log("Players turn: " + playersTurn);
+            playHandButton.disabled = playersTurn !== username;
+
+            cards = data.cardsInHand;
+            if (cards !== undefined) setCardsView();
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -97,6 +103,9 @@ const messageHandlers = {
         divLobby.style.display = "none";
         divGame.style.display = "block";
         setPlayerView();
+        loadGameData();
+    },
+    iterateTurn(messageData){
         loadGameData();
     }
 };
@@ -163,19 +172,20 @@ window.sendRaiseHand = sendRaiseHand;
 
 document.getElementById("playHandForm").addEventListener("submit", function(event) {
     event.preventDefault();
-    sendMessage({ type: "playHand", username, hand:{A:1,K:0,Q:0,J:0} });
+    let hand = {};
+    for (let i = 0; i < selectedCards.length; i++){
+        const type = selectedCards[i][0];
+        if (type in hand) hand[type]++;
+        else hand[type] = 1;
+    }
+    console.log("Hand is: " + hand);
+    sendMessage({ type: "playHand", username, hand:hand});
 });
-document.addEventListener("DOMContentLoaded", () => {
-
-
-});
-
 function loadGameState(){
     divLobby.style.display = "none";
     divGame.style.display = "inline";
     setPlayerView();
 }
-// Establish WebSocket connection
 
 function setPlayerView() {
 
@@ -204,4 +214,46 @@ function setPlayerView() {
 
     div_userTopRight.style.top = "0";
     div_userTopRight.style.right = "0";
+}
+function setCardsView(){
+    cardsDiv.replaceChildren();
+    //console.log(cards);
+    for (const key in cards){
+        for (let i = 0; i < cards[key]; i++){
+            const cardDiv = document.createElement("div");
+            const symbol = key.charAt(0);
+            const divText = document.createTextNode(symbol);
+            cardDiv.appendChild(divText);
+            cardDiv.className = "cardDiv";
+            cardDiv.id = symbol+i;
+            console.log(symbol+i);
+            cardsDiv.appendChild(cardDiv);
+            cardDiv.addEventListener('click', deselectCardHandler);
+        }
+    }
+}
+function selectCard(cardId){
+    selectedCards.push(cardId);
+    console.log("Selected a card, selected cards: " + selectedCards);
+    const selectedCardDiv = document.getElementById(cardId);
+    selectedCardDiv.style.backgroundColor = "brown";
+    selectedCardDiv.removeEventListener('click', deselectCardHandler);
+    selectedCardDiv.addEventListener('click', selectCardHandler);
+}
+function deselectCard(cardId){
+    selectedCards.splice(selectedCards.indexOf(cardId), 1);
+    console.log("Deselected a card, selected cards: " + selectedCards);
+    const selectedCardDiv = document.getElementById(cardId);
+    selectedCardDiv.style.backgroundColor = "yellow";
+    selectedCardDiv.removeEventListener('click', selectCardHandler);
+    selectedCardDiv.addEventListener('click', deselectCardHandler);
+}
+function selectCardHandler(event) {
+    const cardId = event.currentTarget.id; // Get the card ID
+    deselectCard(cardId);
+}
+
+function deselectCardHandler(event) {
+    const cardId = event.currentTarget.id; // Get the card ID
+    selectCard(cardId);
 }

@@ -82,6 +82,7 @@ public class RouteHandler {
             data.put("gameStarted", (game != null)?"1":"0");
             if (game != null){
                 data.put("playersTurn",game.currentRound.currentPlayer.name);
+                data.put("cardsInHand",game.GetPlayer(urlName).hand.cards);
             }
             return gson.toJson(data);
         });
@@ -189,7 +190,10 @@ public class RouteHandler {
                     System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
                     player.hand.PrintCards();
                 }
-                System.out.println(game.currentRound.IterateTurn('P',bodyAttributes.get("hand").toString()));
+                boolean success = game.currentRound.IterateTurn('P',bodyAttributes.get("hand").toString());
+                if (success) System.out.println("Successfully played turn: ");
+                else System.out.println("Unsuccessfully played turn: ");
+                System.out.println();
                 //for (Player player: game.players){
                 //    System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
                 //    player.hand.PrintCards();

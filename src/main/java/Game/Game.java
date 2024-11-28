@@ -30,4 +30,13 @@ public class Game {
         System.out.println("Printing players:");
         System.out.println(players);
     }
+    public Player GetPlayer(String name){
+        for(Player player: players){
+            if (player.name.equals(name)){
+                return player;
+            }
+        }
+        System.out.println("Player with this name not found: " + name);
+        return null;
+    }
 }

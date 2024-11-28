@@ -44,7 +44,6 @@ const messageHandlers = {
     raise_hand(ws, data) {
         const username = data.username;
         const info = `${username} raised their hand`;
-        console.log(info);
 
         broadcast({
             type: "update_user",
@@ -63,8 +62,9 @@ const messageHandlers = {
         const result= await sendToJava("start_game");
         broadcast({ type: "startGame"});
     },
-    playHand(ws, data){
-        sendToJava("play_hand",data);
+    async playHand(ws, data){
+        const result = await sendToJava("play_hand",data);
+        broadcast({type:"iterateTurn"});
     }
 };
 
@@ -77,7 +77,6 @@ wss.on("connection", (ws) => {
             console.error("Invalid JSON:", e);
             return;
         }
-        console.log(data);
         const handler = messageHandlers[data.type];
         if (handler) {
             handler(ws, data);

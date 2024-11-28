@@ -25,8 +25,6 @@
     <button type= "submit" id="startButton" onclick="startGame()" disabled>Start</button>
 </div>
 <div id="game" style="display: none">
-    <p style="display: none" id="users"><#list users?keys as key>${key},</#list>
-    </p>
     <h2>Welcome to the Dashboard, ${name}!</h2>
 
     <!-- Button to raise hand -->
@@ -34,8 +32,9 @@
 
     <div id="container">
         <div id="user" class="user_div">
+            <div id="cardsDiv"></div>
             <form id="playHandForm">
-                <button id="playHand" type="submit">Play</button>
+                <button id="playHand" type="submit" disabled>Play</button>
             </form>
         </div>
         <div id="userTopRight" class="user_div"></div>

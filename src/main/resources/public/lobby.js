@@ -1,9 +1,11 @@
 import { ws, sendMessage } from './web_socket';
 let gameStarted = "";
 let username = document.location.href.substring(document.location.href.indexOf("?")+1);
+let leader = "";
+let playersTurn = "";
+
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
-let leader = "";
 const playerList = document.getElementById('player-list');
 const chat = document.getElementById('chat');
 const chatForm = document.getElementById('chat-form');
@@ -43,6 +45,9 @@ function loadGameData(){
             else{
                 divLobby.style.display = "inline";
             }
+            console.log("Game started: " + gameStarted);
+            playersTurn = data.playersTurn;
+            console.log("Players turn: " + playersTurn);
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -62,7 +67,7 @@ const messageHandlers = {
         userDiv.textContent = messageData.message;
     },
     join(messageData) {
-        addChatMessage(username + " has been resurrected.");
+        addChatMessage(messageData.user + " has been resurrected.");
         updatePlayerList();
     },
     chatMessage(messageData) {
@@ -84,20 +89,21 @@ const messageHandlers = {
     setUsers(messageData) {
         players = Array.from(messageData.users);
         document.getElementById("startButton").disabled = (leader !== username || players.length !== 3);
-        console.log("Number of players: " + players.length);
-        console.log("Leader: " + leader);
-        console.log("Username: " + username);
+        //console.log("Number of players: " + players.length);
+        //console.log("Leader: " + leader);
+        //console.log("Username: " + username);
     },
     startGame(messageData){
         divLobby.style.display = "none";
         divGame.style.display = "block";
         setPlayerView();
+        loadGameData();
     }
 };
 
 ws.onopen = () => {
-    const message = JSON.stringify({type: "join", username: username});
-    ws.send(message);
+    const message = {type: "join", username: username};
+    sendMessage(message);
 };
 ws.onmessage = (event) => {
     const messageData = JSON.parse(event.data);
@@ -139,28 +145,29 @@ function addChatMessage(message, sender = 'System') {
 }
 updatePlayerList();
 function startGame(){
-    const message = JSON.stringify({type: "startGame"});//could add some additional settings here, e.g. rounds etc.
+    const message = {type: "startGame"};//could add some additional settings here, e.g. rounds etc.
     if (ws.readyState === WebSocket.CONNECTING){
         ws.addEventListener("open", function sendMessageOnOpen() {
-            ws.send(message);
-            console.log("Message sent after WebSocket opened.");
+            sendMessage(message);
             ws.removeEventListener("open", sendMessageOnOpen); // Clean up the listener
         });
     }else{
-        ws.send(message);
+        sendMessage(message);
     }
 }
+function sendRaiseHand(){
+    sendMessage({ type: "raise_hand", username });
+}
 window.startGame = startGame;
+window.sendRaiseHand = sendRaiseHand;
 
-
-
-//---------------------------------------------------------//--------------------------------------------------------- dashboard.js
-
+document.getElementById("playHandForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    sendMessage({ type: "playHand", username, hand:{A:1,K:0,Q:0,J:0} });
+});
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("raiseHandForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        sendMessage({ type: "raise_hand", username });
-    });
+
+
 });
 
 function loadGameState(){

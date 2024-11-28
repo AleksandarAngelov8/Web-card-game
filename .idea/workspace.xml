@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="decided to remove ftl dynamic loading and to just load the data through get routes">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="implemented game logic fully, fixed bugs, now just need to implement on front end">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Round.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +203,8 @@
       <workItem from="1732653316466" duration="11829000" />
       <workItem from="1732698988408" duration="12285000" />
       <workItem from="1732721356246" duration="15940000" />
-      <workItem from="1732746165427" duration="7873000" />
+      <workItem from="1732746165427" duration="8076000" />
+      <workItem from="1732809000805" duration="18830000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -333,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732738870156</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="implemented game logic fully, fixed bugs, now just need to implement on front end">
+      <option name="closed" value="true" />
+      <created>1732754249245</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1732754249245</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +376,8 @@
     <MESSAGE value="combined lobby and game(dashboard) into one file, websocket code refactoring, buzz word buzz word" />
     <MESSAGE value="fixing more server communication json bugs, oh god there are so many bugs" />
     <MESSAGE value="decided to remove ftl dynamic loading and to just load the data through get routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="decided to remove ftl dynamic loading and to just load the data through get routes" />
+    <MESSAGE value="implemented game logic fully, fixed bugs, now just need to implement on front end" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented game logic fully, fixed bugs, now just need to implement on front end" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

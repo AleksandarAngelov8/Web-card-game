@@ -1,5 +1,7 @@
 package Game;
 
+import com.google.gson.Gson;
+
 import java.util.*;
 
 public class Round {
@@ -35,15 +37,16 @@ public class Round {
         liarsCard = newCard;
     }
     // Example: <C> for call, <P2Q>
-    public boolean IterateTurn(String move){
-        if (move.charAt(0) == 'C'){
+    public boolean IterateTurn(Character moveType, String handUnformatted){
+        String handS = ConvertHandString(handUnformatted);
+        if (moveType == 'C'){
             return Call();
         }
-        else if (move.charAt(0) == 'P'){
+        else if (moveType == 'P'){
             Map<CardType,Integer> cards = new HashMap();
-            for (int i = 1; i < move.length(); i+=2){
-                int number = move.charAt(i) - '0';
-                Character cardTypeC = move.charAt(i+1);
+            for (int i = 0; i < handS.length()-1; i+=2){
+                Character cardTypeC = handS.charAt(i);
+                int number = handS.charAt(i+1) - '0';
                 CardType cardType = null;
                 switch (cardTypeC){
                     case 'A':
@@ -122,7 +125,10 @@ public class Round {
         Collections.shuffle(cards);
         for (int i = 0; i<15;){
             for (Player player: game.players){
-                if (!player.alive) continue;
+                if (!player.alive) {
+                    i++;
+                    continue;
+                }
                 player.hand.AddCard(cards.get(i));
                 i++;
             }
@@ -141,5 +147,16 @@ public class Round {
         for (Player player: game.players){
             if (player.alive) System.out.println(player.name);
         }
+    }
+    private String ConvertHandString(String handUnformatted){
+        Map handCards = new Gson().fromJson(handUnformatted, Map.class);
+        String hand = "";
+        for (Object cardType: handCards.keySet()){
+            int number = (int)Double.parseDouble(handCards.get(cardType).toString());
+            if (number == 0) continue;
+            hand += cardType.toString() + number;
+        }
+        System.out.println("Playing: "+hand);
+        return hand;
     }
 }

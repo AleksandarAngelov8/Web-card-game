@@ -2,6 +2,7 @@ package RouteHandler;
 
 import Game.Game;
 import Game.Player;
+import Game.CardType;
 import UserRightsManager.UserRightsManager;
 import UserRightsManager.User;
 import com.google.gson.Gson;
@@ -79,8 +80,9 @@ public class RouteHandler {
             data.put("users", otherUsers.keySet());
             data.put("name", urlName);
             data.put("gameStarted", (game != null)?"1":"0");
-            // Convert map to JSON string
-
+            if (game != null){
+                data.put("playersTurn",game.currentRound.currentPlayer.name);
+            }
             return gson.toJson(data);
         });
         get("/hand_shake", (request, response) -> {
@@ -166,7 +168,33 @@ public class RouteHandler {
 
                 game = new Game(List.copyOf(userRightsManager.getOnlineUsers().keySet()), 1);
                 game.SetupNewRound();
-                TestGameRun();
+
+                //TestGameRun();
+            } catch (JsonSyntaxException e) {
+                System.err.println("Error parsing JSON: " + e.getMessage());
+                halt(400, "Invalid JSON format");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        });
+        post("/play_hand", (request, response) -> {
+            String body = request.body();
+            try {
+                Map bodyAttributes = new Gson().fromJson(body, Map.class);
+                if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
+
+                System.out.println(bodyAttributes.get("hand"));
+                for (Player player: game.players){
+                    System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
+                    player.hand.PrintCards();
+                }
+                System.out.println(game.currentRound.IterateTurn('P',bodyAttributes.get("hand").toString()));
+                //for (Player player: game.players){
+                //    System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
+                //    player.hand.PrintCards();
+                //}
+                //TestGameRun();
             } catch (JsonSyntaxException e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
                 halt(400, "Invalid JSON format");
@@ -214,13 +242,13 @@ public class RouteHandler {
             System.out.println("Current player:" + game.currentRound.currentPlayer.name);
             System.out.println("Liars card:" + game.currentRound.liarsCard);
             if (i%2 == 0){
-                if (!game.currentRound.IterateTurn("P1A")){
+                if (!game.currentRound.IterateTurn('P',"2A")){
                     System.out.println("No aces");
-                    if(!game.currentRound.IterateTurn("P1K")){
+                    if(!game.currentRound.IterateTurn('P',"2K")){
                         System.out.println("No kings");
-                        if (!game.currentRound.IterateTurn("P1Q")){
+                        if (!game.currentRound.IterateTurn('P',"2Q")){
                             System.out.println("No queen");
-                            if (!game.currentRound.IterateTurn("P1Q")) {
+                            if (!game.currentRound.IterateTurn('P',"2J")) {
                                 System.out.println("No Jokers");
                             }
                         }
@@ -228,7 +256,7 @@ public class RouteHandler {
                 }
             }
             else{
-                game.currentRound.IterateTurn("C");
+                game.currentRound.IterateTurn('C',"");
             }
             System.out.println();
         }

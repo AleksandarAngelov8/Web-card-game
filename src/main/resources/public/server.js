@@ -59,9 +59,12 @@ const messageHandlers = {
         const message = data.text;
         broadcast({ type: "chatMessage", user: username, text: message });
     },
-    startGame(ws, data) {
-        sendToJava("start_game");
+    async startGame(ws, data) {
+        const result= await sendToJava("start_game");
         broadcast({ type: "startGame"});
+    },
+    playHand(ws, data){
+        sendToJava("play_hand",data);
     }
 };
 
@@ -74,12 +77,13 @@ wss.on("connection", (ws) => {
             console.error("Invalid JSON:", e);
             return;
         }
-
+        console.log(data);
         const handler = messageHandlers[data.type];
         if (handler) {
             handler(ws, data);
         } else {
             console.error(`Unknown message type: ${data.type}`);
+
         }
     });
     ws.on('close', () => {
@@ -108,15 +112,22 @@ function broadcast(data) {
         }
     });
 }
-function sendToJava(route,data={}){
+async function sendToJava(route,data={}){
     data.token = communicationToken;
-    fetch(`http://${JAVA_SERVER_HOST}:4567/` + route, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }).catch(error => console.error('Error updating info:', error));
+    try {
+        const response = await fetch(`http://${JAVA_SERVER_HOST}:4567/` + route, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).catch(error => console.error('Error updating info:', error));
+        return await response;
+    }catch (error){
+        console.error("Error sending data to java: ", error);
+        throw error;
+    }
+
 }
 function getNetworkAddresses() {
     const interfaces = os.networkInterfaces();

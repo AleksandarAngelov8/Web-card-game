@@ -33,13 +33,15 @@
 
 
     <div id="container">
-        <div id="user" class="user_div"></div>
+        <div id="user" class="user_div">
+            <form id="playHandForm">
+                <button id="playHand" type="submit">Play</button>
+            </form>
+        </div>
         <div id="userTopRight" class="user_div"></div>
         <div id="userTopLeft" class="user_div"></div>
     </div>
-    <form id="raiseHandForm">
-        <button id="raiseHand" type="submit" >Raise Hand</button>
-    </form>
+        <button id="raiseHand" type="submit" onclick="sendRaiseHand()">Raise Hand</button>
 </div>
 <script type="module" src="lobby.js"></script>
 </body>

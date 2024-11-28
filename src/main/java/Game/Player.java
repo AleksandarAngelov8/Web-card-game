@@ -4,11 +4,13 @@ import java.util.Random;
 
 public class Player {
     boolean [] gunLoadout = {false,false,false,false,false,false};
-    String name;
+    public String name;
     int currentBullet;
     Player previousPlayer,nextPlayer;
-    boolean alive;
+    public boolean alive;
+    public Hand hand;
     public Player(String n){
+        hand = new Hand();
         Random random = new Random();
         int activeBullet = Math.abs(random.nextInt()%6);
         gunLoadout[activeBullet] = true;
@@ -21,13 +23,17 @@ public class Player {
         previousPlayer = pp;
         nextPlayer = np;
     }
-    public void ShootSelf(){
+    public boolean ShootSelf(){
         if (gunLoadout[currentBullet]) {
             alive = false;
             previousPlayer.nextPlayer = this.nextPlayer;
             nextPlayer.previousPlayer = this.previousPlayer;
-            return;
+            System.out.println(name + " successfully shot themselves.");
+            return true;
         }
+        System.out.println(name + " shot a blank.");
         currentBullet++;
+        return false;
     }
+
 }

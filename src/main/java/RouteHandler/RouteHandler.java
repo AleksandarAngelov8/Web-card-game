@@ -1,6 +1,7 @@
 package RouteHandler;
 
 import Game.Game;
+import Game.Player;
 import UserRightsManager.UserRightsManager;
 import UserRightsManager.User;
 import com.google.gson.Gson;
@@ -164,6 +165,8 @@ public class RouteHandler {
                 if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
 
                 game = new Game(List.copyOf(userRightsManager.getOnlineUsers().keySet()), 1);
+                game.SetupNewRound();
+                TestGameRun();
             } catch (JsonSyntaxException e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
                 halt(400, "Invalid JSON format");
@@ -178,8 +181,6 @@ public class RouteHandler {
         String username = request.session().attribute("username");
         User user = userRightsManagerLocal.getUsers().get(username);
         try{
-            System.out.println("Session token here is: " + user.sessionToken);
-            System.out.println("Session token there is: " + request.session().attribute("sessionToken"));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -204,5 +205,35 @@ public class RouteHandler {
         }
         return writer.toString();
     }
-
+    private static void TestGameRun(){
+        for (int i = 0; i < 20; i++){
+            for (Player player: game.players){
+                System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
+                player.hand.PrintCards();
+            }
+            System.out.println("Current player:" + game.currentRound.currentPlayer.name);
+            System.out.println("Liars card:" + game.currentRound.liarsCard);
+            if (i%2 == 0){
+                if (!game.currentRound.IterateTurn("P1A")){
+                    System.out.println("No aces");
+                    if(!game.currentRound.IterateTurn("P1K")){
+                        System.out.println("No kings");
+                        if (!game.currentRound.IterateTurn("P1Q")){
+                            System.out.println("No queen");
+                            if (!game.currentRound.IterateTurn("P1Q")) {
+                                System.out.println("No Jokers");
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                game.currentRound.IterateTurn("C");
+            }
+            System.out.println();
+        }
+        for (Player player: game.players){
+            player.hand.PrintCards();
+        }
+    }
 }

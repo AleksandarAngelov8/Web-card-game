@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Game {
     int totalRounds, roundNumber;
-    Round currentRound;
-    List<Player> players;
+    public Round currentRound;
+    public List<Player> players;
     public Game(List<String> usernames, int tR){
         players = new ArrayList();
         for (int i = 0; i < usernames.size(); i++){

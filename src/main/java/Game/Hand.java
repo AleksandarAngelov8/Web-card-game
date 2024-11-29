@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class Hand {
     public Map<CardType, Integer> cards;
-    public Hand(Map<CardType, Integer> cards){
-        this.cards = cards;
+    public String player;
+    public Hand(Map<CardType, Integer> cards, String player){
+        this.cards = cards;this.player = player;
     }
     public boolean IsLie(CardType liarsType){
         for (CardType card: cards.keySet()){

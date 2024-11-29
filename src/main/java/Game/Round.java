@@ -12,15 +12,17 @@ public class Round {
     Random random;
     Map<String, Object> turnInformation;
     public int restartCounter;
+    public boolean forcedToCall;
     public Round(Game g){
         random = new Random();
         game = g;
         SetNewLiarsCard();
-        currentPlayer = game.players.get(Math.abs(random.nextInt()%3));
+        SetCurrentPlayer();
         turnInformation = new HashMap<>();
 
         DistributeCards();
         restartCounter = -1;
+        forcedToCall = false;
     }
     private void SetNewLiarsCard(){
         CardType newCard = liarsCard;
@@ -44,7 +46,7 @@ public class Round {
     public boolean IterateTurn(Character moveType){
         if (moveType == 'C'){
             turnInformation.put("playerMoving",currentPlayer.name);
-            turnInformation.put("previousPlayer",currentPlayer.previousPlayer.name);
+            turnInformation.put("previousPlayer",(lastPlayedHand!=null)?lastPlayedHand.player:"");
             turnInformation.put("moveType",moveType);
             if (lastPlayedHand != null) turnInformation.put("playedHand",lastPlayedHand.cards);
 
@@ -56,7 +58,7 @@ public class Round {
     public boolean IterateTurn(Character moveType, String handUnformatted){
         if (moveType == 'P'){
             turnInformation.put("playerMoving",currentPlayer.name);
-            turnInformation.put("previousPlayer",currentPlayer.previousPlayer.name);
+            turnInformation.put("previousPlayer",(lastPlayedHand!=null)?lastPlayedHand.player:"");
             turnInformation.put("moveType",moveType);
 
             String handS = ConvertHandString(handUnformatted);
@@ -84,7 +86,7 @@ public class Round {
                 }
                 cards.put(cardType,number);
             }
-            Hand hand = new Hand(cards);
+            Hand hand = new Hand(cards,currentPlayer.name);
             //turnInformation.put("playedHand",cards);
             Map<CardType,Integer> allegedCards = new HashMap();
             allegedCards.put(liarsCard,numberOfCardsPlayed);
@@ -100,39 +102,20 @@ public class Round {
             System.out.println("There is no last hand");
             return false;
         }
+
         turnInformation.put("wasLie",lastPlayedHand.IsLie(liarsCard));
+        boolean shootingSuccess;
         if (lastPlayedHand.IsLie(liarsCard)){
             System.out.println("It was a lie");
-            boolean shootingSuccess = currentPlayer.previousPlayer.ShootSelf();
-            turnInformation.put("shootingSuccess", shootingSuccess);
-
-            if (!shootingSuccess)
-                currentPlayer = currentPlayer.nextPlayer;
-            else{
-                if (CheckOnlyAlive()){
-                    FinishGame();
-                }
-                currentPlayer = currentPlayer.nextPlayer;
-                SetNewLiarsCard();
-                DistributeCards();
-            }
+            shootingSuccess = currentPlayer.previousPlayer.ShootSelf();
         }
         else{
             System.out.println("It was NOT a lie");
-            boolean shootingSuccess = currentPlayer.ShootSelf();
-            turnInformation.put("shootingSuccess", shootingSuccess);
-            if (!shootingSuccess)
-                currentPlayer = currentPlayer.nextPlayer;
-            else{
-                if (CheckOnlyAlive()){
-                    FinishGame();
-                }
-                currentPlayer = currentPlayer.nextPlayer;
-                SetNewLiarsCard();
-                DistributeCards();
-            }
+            shootingSuccess = currentPlayer.ShootSelf();
         }
+        turnInformation.put("shootingSuccess", shootingSuccess);
         lastPlayedHand = null;
+        EndRound();
         return true;
     }
     private boolean Play(Hand hand){
@@ -145,7 +128,8 @@ public class Round {
 
                 Player otherPlayer = currentPlayer.previousPlayer;
                 if (currentPlayer.nextPlayer == otherPlayer){
-                    while(otherPlayer.alive) otherPlayer.ShootSelf();
+                    System.out.println("Forced to eat pant");
+                    forcedToCall = true;
                 }
             }
             currentPlayer = currentPlayer.nextPlayer;
@@ -203,5 +187,48 @@ public class Round {
     }
     public Map<String, Object> FetchTurnInformation(){
         return turnInformation;
+    }
+    static public void SetAliveNeighbours(Game game){
+        List<String> usernames = new ArrayList<>();
+        List<Player> alivePlayer = new ArrayList<>();
+        for (Player player: game.players)
+        {
+            if (player.alive){
+                usernames.add(player.name);
+                alivePlayer.add(player);
+            }
+        }
+        if (alivePlayer.size() == 2){
+            alivePlayer.get(0).nextPlayer = alivePlayer.get(1);
+            alivePlayer.get(0).previousPlayer = alivePlayer.get(1);
+            alivePlayer.get(1).nextPlayer = alivePlayer.get(0);
+            alivePlayer.get(1).previousPlayer = alivePlayer.get(0);
+            return;
+        }
+        for (int i = 0; i < usernames.size(); i++){
+            int prev = (i-1)<0?2:i-1;
+            int next = (i+1)>2?0:i+1;
+            game.players.get(i).SetNeighbours(game.players.get(prev),game.players.get(next));
+        }
+    }
+    private void EndRound(){
+        if (CheckOnlyAlive()){
+            FinishGame();
+        }
+        SetAliveNeighbours(game);
+        SetNewLiarsCard();
+        DistributeCards();
+        SetCurrentPlayer();
+        forcedToCall = false;
+    }
+    private void SetCurrentPlayer(){
+        List<Player> alivePlayer = new ArrayList<>();
+        for (Player player: game.players)
+        {
+            if (player.alive){
+                alivePlayer.add(player);
+            }
+        }
+        currentPlayer = game.getAlivePlayers().get(Math.abs(random.nextInt()%alivePlayer.size()));
     }
 }

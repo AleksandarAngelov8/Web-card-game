@@ -11,6 +11,7 @@ let liarsCard;
 let canCall = false;
 let JAVA_SERVER_HOST;
 let alivePlayers;
+let forcedToCall;
 
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
@@ -67,13 +68,15 @@ function loadGameData(){
             isCurrentlyPlaying = playersTurn === username
             callPrevHandButton.disabled = !isCurrentlyPlaying || !canCall;
 
-            cards = data.cardsInHand;
-            if (cards !== undefined) setCardsView();
+
             liarsCard = data.liarsCard;
             liarsCardH3.innerHTML = `Liars card this round: ${liarsCard}`;
 
-
+            forcedToCall = data.forcedToCall;
             const logData = data.moveInfo;
+
+            cards = data.cardsInHand;
+            if (cards !== undefined) setCardsView();
 
             if (logData !== undefined && logData["moveType"] !== undefined){
                 const logEntryDiv = document.createElement("div");
@@ -123,6 +126,7 @@ function loadGameData(){
                 logDiv.className = "logEntry";
                 logDiv.appendChild(logEntryDiv);
                 logDiv.scrollTop = logDiv.scrollHeight;
+
             }
             if (data.shouldRestart !== undefined){
                 const logEntryDiv = document.createElement("div");
@@ -330,6 +334,7 @@ function setPlayerView() {
     div_userTopRight.style.right = "0";
 }
 function setCardsView(){
+    console.log("Setting card view:");
     cardsDiv.replaceChildren();
     //console.log(cards);
     for (const key in cards){
@@ -342,13 +347,16 @@ function setCardsView(){
             cardDiv.id = symbol+i;
             //console.log(symbol+i);
             cardsDiv.appendChild(cardDiv);
-            if (isCurrentlyPlaying){
+            if (isCurrentlyPlaying && !forcedToCall){
                 cardDiv.addEventListener('click', deselectCardHandler);
             }
         }
     }
 }
 function selectCard(cardId){
+    if (selectedCards.length === 3){
+        return;
+    }
     playHandButton.disabled = false;
     selectedCards.push(cardId);
     console.log("Selected a card, selected cards: " + selectedCards);

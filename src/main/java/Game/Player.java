@@ -3,7 +3,7 @@ package Game;
 import java.util.Random;
 
 public class Player {
-    boolean [] gunLoadout = {true,false,false,false,false,false};
+    boolean [] gunLoadout = {false,false,false,false,false,false};
     public String name;
     int currentBullet;
     Player previousPlayer,nextPlayer;
@@ -28,6 +28,7 @@ public class Player {
             alive = false;
             previousPlayer.nextPlayer = this.nextPlayer;
             nextPlayer.previousPlayer = this.previousPlayer;
+
             System.out.println(name + " successfully shot themselves.");
             return true;
         }

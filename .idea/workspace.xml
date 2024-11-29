@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="fixed being able to log in as two users at the same time">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="added game over, back to lobby">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Hand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Round.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
@@ -204,6 +206,7 @@
       <workItem from="1732721356246" duration="15940000" />
       <workItem from="1732746165427" duration="8076000" />
       <workItem from="1732809000805" duration="29530000" />
+      <workItem from="1732893901815" duration="12150000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -365,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732868701978</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added game over, back to lobby">
+      <option name="closed" value="true" />
+      <created>1732885364789</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1732885364789</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,7 +414,8 @@
     <MESSAGE value="fixed bug, sending data to clients should wait for response from sending data to java" />
     <MESSAGE value="very basic ui for selecting, showing and playing cards" />
     <MESSAGE value="fixed being able to log in as two users at the same time" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed being able to log in as two users at the same time" />
+    <MESSAGE value="added game over, back to lobby" />
+    <option name="LAST_COMMIT_MESSAGE" value="added game over, back to lobby" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

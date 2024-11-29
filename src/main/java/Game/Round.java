@@ -8,7 +8,7 @@ public class Round {
     Game game;
     public CardType liarsCard;
     public Player currentPlayer;
-    Hand lastPlayedHand;
+    public Hand lastPlayedHand;
     Random random;
     public Round(Game g){
         random = new Random();
@@ -37,12 +37,16 @@ public class Round {
         liarsCard = newCard;
     }
     // Example: <C> for call, <P2Q>
-    public boolean IterateTurn(Character moveType, String handUnformatted){
-        String handS = ConvertHandString(handUnformatted);
+    public boolean IterateTurn(Character moveType){
         if (moveType == 'C'){
             return Call();
         }
-        else if (moveType == 'P'){
+        System.out.println("Invalid move");
+        return false;
+    }
+    public boolean IterateTurn(Character moveType, String handUnformatted){
+        String handS = ConvertHandString(handUnformatted);
+        if (moveType == 'P'){
             Map<CardType,Integer> cards = new HashMap();
             for (int i = 0; i < handS.length()-1; i+=2){
                 Character cardTypeC = handS.charAt(i);
@@ -58,16 +62,17 @@ public class Round {
                     case 'Q':
                         cardType = CardType.Queen;
                         break;
+                    case 'J':
+                        cardType = CardType.Joker;
+                        break;
                 }
                 cards.put(cardType,number);
             }
             Hand hand = new Hand(cards);
             return Play(hand);
         }
-        else {
-            System.out.println("Invalid move");
-            return false;
-        }
+        System.out.println("Invalid move");
+        return false;
     }
     public boolean Call(){
         if (lastPlayedHand == null) return false;
@@ -106,6 +111,11 @@ public class Round {
             if (currentPlayer.hand.cards.isEmpty()){
                 currentPlayer.previousPlayer.nextPlayer = currentPlayer.nextPlayer;
                 currentPlayer.nextPlayer.previousPlayer = currentPlayer.previousPlayer;
+
+                Player otherPlayer = currentPlayer.previousPlayer;
+                if (currentPlayer.nextPlayer == otherPlayer){
+                    while(otherPlayer.alive) otherPlayer.ShootSelf();
+                }
             }
             currentPlayer = currentPlayer.nextPlayer;
         }

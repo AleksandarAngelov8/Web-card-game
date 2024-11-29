@@ -5,6 +5,10 @@ let leader = "";
 let playersTurn = "";
 let cards;
 let selectedCards = [];
+let isCurrentlyPlaying = false;
+let numPlayedHands = 0;
+let liarsCard;
+let canCall = false;
 
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
@@ -17,7 +21,9 @@ const div_user = document.getElementById("user");
 const div_userTopRight = document.getElementById("userTopRight");
 const div_userTopLeft = document.getElementById("userTopLeft");
 const playHandButton = document.getElementById("playHand");
+const callPrevHandButton = document.getElementById("callPrevHand");
 const cardsDiv = document.getElementById("cardsDiv");
+const liarsCardH3 = document.getElementById("liarsCard");
 
 let players = [
 ];
@@ -50,10 +56,15 @@ function loadGameData(){
                 divLobby.style.display = "inline";
             }
             playersTurn = data.playersTurn;
-            playHandButton.disabled = playersTurn !== username;
-
+            isCurrentlyPlaying = playersTurn === username
+            callPrevHandButton.disabled = !isCurrentlyPlaying || !canCall;
+            //console.log("Number of played hands: " + numPlayedHands);
+            //console.log("Is currently playing: " + isCurrentlyPlaying);
+            //console.log("Player's turn: " + playersTurn);
             cards = data.cardsInHand;
             if (cards !== undefined) setCardsView();
+            liarsCard = data.liarsCard;
+            liarsCardH3.innerHTML = liarsCard;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -105,9 +116,18 @@ const messageHandlers = {
         setPlayerView();
         loadGameData();
     },
-    iterateTurn(messageData){
+    playHand(messageData){
+        numPlayedHands++;
+        canCall = true;
         loadGameData();
-    }
+        playHandButton.disabled = true;
+    },
+    callPrevHand(messageData){
+        numPlayedHands++;
+        canCall = false;
+        loadGameData();
+        playHandButton.disabled = true;
+    },
 };
 
 ws.onopen = () => {
@@ -169,24 +189,37 @@ function sendRaiseHand(){
 }
 window.startGame = startGame;
 window.sendRaiseHand = sendRaiseHand;
+window.playHand = playHand;
+window.callPrevHand = callPrevHand;
+function playHand (){
+    let hand = new Map();
 
-document.getElementById("playHandForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    let hand = {};
-    for (let i = 0; i < selectedCards.length; i++){
+    for (let i = 0; i < selectedCards.length; i++) {
         const type = selectedCards[i][0];
-        if (type in hand) hand[type]++;
-        else hand[type] = 1;
+        console.log("Type is: " + type);
+
+        if (hand.has(type)) {
+            console.log("Increasing number");
+            hand.set(type, hand.get(type) + 1); // Increment the count
+        } else {
+            console.log("Added new type");
+            hand.set(type, 1); // Initialize with 1
+        }
     }
-    console.log("Hand is: " + hand);
-    sendMessage({ type: "playHand", username, hand:hand});
-});
+
+    console.log("Hand is:", Object.fromEntries(hand)); // Convert Map to an object for logging
+
+    sendMessage({ type: "playHand", username, hand: Object.fromEntries(hand) });
+    selectedCards = [];
+}
+function callPrevHand(){
+    sendMessage({ type: "callPrevHand"});
+}
 function loadGameState(){
     divLobby.style.display = "none";
     divGame.style.display = "inline";
     setPlayerView();
 }
-
 function setPlayerView() {
 
     if (players.indexOf(username) === 0){
@@ -226,13 +259,16 @@ function setCardsView(){
             cardDiv.appendChild(divText);
             cardDiv.className = "cardDiv";
             cardDiv.id = symbol+i;
-            console.log(symbol+i);
+            //console.log(symbol+i);
             cardsDiv.appendChild(cardDiv);
-            cardDiv.addEventListener('click', deselectCardHandler);
+            if (isCurrentlyPlaying){
+                cardDiv.addEventListener('click', deselectCardHandler);
+            }
         }
     }
 }
 function selectCard(cardId){
+    playHandButton.disabled = false;
     selectedCards.push(cardId);
     console.log("Selected a card, selected cards: " + selectedCards);
     const selectedCardDiv = document.getElementById(cardId);
@@ -241,6 +277,7 @@ function selectCard(cardId){
     selectedCardDiv.addEventListener('click', selectCardHandler);
 }
 function deselectCard(cardId){
+    playHandButton.disabled = selectedCards.length === 1;
     selectedCards.splice(selectedCards.indexOf(cardId), 1);
     console.log("Deselected a card, selected cards: " + selectedCards);
     const selectedCardDiv = document.getElementById(cardId);
@@ -252,7 +289,6 @@ function selectCardHandler(event) {
     const cardId = event.currentTarget.id; // Get the card ID
     deselectCard(cardId);
 }
-
 function deselectCardHandler(event) {
     const cardId = event.currentTarget.id; // Get the card ID
     selectCard(cardId);

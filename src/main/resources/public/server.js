@@ -64,7 +64,11 @@ const messageHandlers = {
     },
     async playHand(ws, data){
         const result = await sendToJava("play_hand",data);
-        broadcast({type:"iterateTurn"});
+        broadcast({type:"playHand"});
+    },
+    async callPrevHand(ws, data){
+        const result = await sendToJava("call_prev_hand",data);
+        broadcast({type:"callPrevHand"});
     }
 };
 

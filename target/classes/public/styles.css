@@ -87,12 +87,22 @@ body {
     position: absolute;
     width: 40%;
     height: 40%;
-    background-color: #4CAF50;
     border: 2px solid #333;
+
 }
 
 #raiseHand{
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+#cardsDiv{
+}
+.cardDiv{
+    background-color:yellow;
+    width: 50px;
+    height: 50px;
+    display: block;
+    float:left
 }

@@ -31,16 +31,16 @@
 
 
     <div id="container">
+        <div id="infoDiv"><h3 id="liarsCard"></h3></div>
         <div id="user" class="user_div">
             <div id="cardsDiv"></div>
-            <form id="playHandForm">
-                <button id="playHand" type="submit" disabled>Play</button>
-            </form>
+            <button id="playHand" onclick="playHand()" disabled>Play</button>
+            <button id="callPrevHand" onclick="callPrevHand()" disabled>Call</button>
         </div>
         <div id="userTopRight" class="user_div"></div>
         <div id="userTopLeft" class="user_div"></div>
     </div>
-        <button id="raiseHand" type="submit" onclick="sendRaiseHand()">Raise Hand</button>
+        <button id="raiseHand" onclick="sendRaiseHand()">Raise Hand</button>
 </div>
 <script type="module" src="lobby.js"></script>
 </body>

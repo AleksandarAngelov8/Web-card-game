@@ -83,6 +83,7 @@ public class RouteHandler {
             if (game != null){
                 data.put("playersTurn",game.currentRound.currentPlayer.name);
                 data.put("cardsInHand",game.GetPlayer(urlName).hand.cards);
+                data.put("liarsCard", game.currentRound.liarsCard);
             }
             return gson.toJson(data);
         });
@@ -190,9 +191,37 @@ public class RouteHandler {
                     System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
                     player.hand.PrintCards();
                 }
+                if (bodyAttributes.get("hand").toString().equals("{}")){
+                    System.out.println("Sent an empty hand of cards");
+                    return null;
+                }
                 boolean success = game.currentRound.IterateTurn('P',bodyAttributes.get("hand").toString());
-                if (success) System.out.println("Successfully played turn: ");
-                else System.out.println("Unsuccessfully played turn: ");
+                if (success) System.out.println("Successfully played hand: ");
+                else System.out.println("Unsuccessfully played hand: ");
+                System.out.println();
+                //for (Player player: game.players){
+                //    System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");
+                //    player.hand.PrintCards();
+                //}
+                //TestGameRun();
+            } catch (JsonSyntaxException e) {
+                System.err.println("Error parsing JSON: " + e.getMessage());
+                halt(400, "Invalid JSON format");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+
+        });
+        post("/call_prev_hand", (request, response) -> {
+            String body = request.body();
+            try {
+                Map bodyAttributes = new Gson().fromJson(body, Map.class);
+                if (!isValidCommunicationToken(bodyAttributes.get("token").toString())) return null;
+
+                boolean success = game.currentRound.IterateTurn('C');
+                if (success) System.out.println("Successfully called previous hand: ");
+                else System.out.println("Unsuccessfully called previous hand: ");
                 System.out.println();
                 //for (Player player: game.players){
                 //    System.out.print(player.name + "("+(player.alive?"alive":"dead")+": ");

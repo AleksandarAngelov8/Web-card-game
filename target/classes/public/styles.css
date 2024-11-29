@@ -85,10 +85,9 @@ body {
 
 .user_div {
     position: absolute;
-    width: 40%;
-    height: 40%;
-    border: 2px solid #333;
-
+    width: 20%;
+    height: 20%;
+    background-color: rgba(0.4,0.0,0.4,0.5);
 }
 
 #raiseHand{
@@ -105,4 +104,48 @@ body {
     height: 50px;
     display: block;
     float:left
+}
+#logDiv {
+    max-width: 800px; /* Maximum width of the log area */
+    margin: 20px auto; /* Center the logDiv on the page */
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow-y: auto; /* Scrollable if content overflows */
+    height: 400px; /* Fixed height with scrolling */
+}
+
+/* Style for each log entry */
+.logEntry {
+    background-color: #fff; /* White background for individual entries */
+    margin-bottom: 10px; /* Space between entries */
+    padding: 10px;
+    border-left: 4px solid #3498db; /* A blue left border to highlight the entry */
+    font-family: 'Arial', sans-serif; /* Modern sans-serif font */
+    font-size: 14px; /* Set font size */
+    color: #333; /* Dark text for good contrast */
+    border-radius: 5px; /* Rounded corners for each entry */
+    line-height: 1.5; /* Increased line spacing for readability */
+    white-space: pre-line; /* Allows for line breaks to appear as expected */
+    word-wrap: break-word; /* Prevents long words from overflowing */
+}
+
+/* Add some hover effects to make it interactive */
+.logEntry:hover {
+    background-color: #e6f7ff; /* Light blue background on hover */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+/* Optional: Style for the player name in bold */
+.playerName {
+    font-weight: bold;
+    color: #3498db; /* Blue color for player names */
+}
+
+/* Style for the log div when it's empty or loading */
+#logDiv.loading {
+    text-align: center;
+    color: #888;
+    font-style: italic;
 }

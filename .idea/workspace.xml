@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="very basic ui for selecting, showing and playing cards">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="fixed being able to log in as two users at the same time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserRightsManager/UserRightsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Round.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/public/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/public/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -357,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732833594332</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="fixed being able to log in as two users at the same time">
+      <option name="closed" value="true" />
+      <created>1732868701978</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1732868701978</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,7 +405,8 @@
     <MESSAGE value="implemented game logic fully, fixed bugs, now just need to implement on front end" />
     <MESSAGE value="fixed bug, sending data to clients should wait for response from sending data to java" />
     <MESSAGE value="very basic ui for selecting, showing and playing cards" />
-    <option name="LAST_COMMIT_MESSAGE" value="very basic ui for selecting, showing and playing cards" />
+    <MESSAGE value="fixed being able to log in as two users at the same time" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed being able to log in as two users at the same time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

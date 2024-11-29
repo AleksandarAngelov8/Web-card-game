@@ -10,11 +10,13 @@ public class Round {
     public Player currentPlayer;
     public Hand lastPlayedHand;
     Random random;
+    Map<String, Object> turnInformation;
     public Round(Game g){
         random = new Random();
         game = g;
         SetNewLiarsCard();
         currentPlayer = game.players.get(Math.abs(random.nextInt()%3));
+        turnInformation = new HashMap<>();
 
         DistributeCards();
     }
@@ -39,18 +41,30 @@ public class Round {
     // Example: <C> for call, <P2Q>
     public boolean IterateTurn(Character moveType){
         if (moveType == 'C'){
+            turnInformation.put("playerMoving",currentPlayer.name);
+            turnInformation.put("previousPlayer",currentPlayer.previousPlayer.name);
+            turnInformation.put("moveType",moveType);
+            if (lastPlayedHand != null) turnInformation.put("playedHand",lastPlayedHand.cards);
+
             return Call();
         }
         System.out.println("Invalid move");
         return false;
     }
     public boolean IterateTurn(Character moveType, String handUnformatted){
-        String handS = ConvertHandString(handUnformatted);
         if (moveType == 'P'){
+            turnInformation.put("playerMoving",currentPlayer.name);
+            turnInformation.put("previousPlayer",currentPlayer.previousPlayer.name);
+            turnInformation.put("moveType",moveType);
+
+            String handS = ConvertHandString(handUnformatted);
+
+            int numberOfCardsPlayed = 0;
             Map<CardType,Integer> cards = new HashMap();
             for (int i = 0; i < handS.length()-1; i+=2){
                 Character cardTypeC = handS.charAt(i);
                 int number = handS.charAt(i+1) - '0';
+                numberOfCardsPlayed+=number;
                 CardType cardType = null;
                 switch (cardTypeC){
                     case 'A':
@@ -69,16 +83,28 @@ public class Round {
                 cards.put(cardType,number);
             }
             Hand hand = new Hand(cards);
+            //turnInformation.put("playedHand",cards);
+            Map<CardType,Integer> allegedCards = new HashMap();
+            allegedCards.put(liarsCard,numberOfCardsPlayed);
+
+            turnInformation.put("allegedPlayedHand",allegedCards);
             return Play(hand);
         }
         System.out.println("Invalid move");
         return false;
     }
-    public boolean Call(){
-        if (lastPlayedHand == null) return false;
+    private boolean Call(){
+        if (lastPlayedHand == null) {
+            System.out.println("There is no last hand");
+            return false;
+        }
+        turnInformation.put("wasLie",lastPlayedHand.IsLie(liarsCard));
         if (lastPlayedHand.IsLie(liarsCard)){
             System.out.println("It was a lie");
-            if (!currentPlayer.previousPlayer.ShootSelf())
+            boolean shootingSuccess = currentPlayer.previousPlayer.ShootSelf();
+            turnInformation.put("shootingSuccess", shootingSuccess);
+
+            if (!shootingSuccess)
                 currentPlayer = currentPlayer.nextPlayer;
             else{
                 if (CheckOnlyAlive()){
@@ -91,7 +117,9 @@ public class Round {
         }
         else{
             System.out.println("It was NOT a lie");
-            if (!currentPlayer.ShootSelf())
+            boolean shootingSuccess = currentPlayer.ShootSelf();
+            turnInformation.put("shootingSuccess", shootingSuccess);
+            if (!shootingSuccess)
                 currentPlayer = currentPlayer.nextPlayer;
             else{
                 if (CheckOnlyAlive()){
@@ -102,9 +130,10 @@ public class Round {
                 DistributeCards();
             }
         }
+        lastPlayedHand = null;
         return true;
     }
-    public boolean Play(Hand hand){
+    private boolean Play(Hand hand){
         lastPlayedHand = hand;
         boolean success = currentPlayer.hand.RemoveCards(hand);
         if (success) {
@@ -168,5 +197,8 @@ public class Round {
         }
         System.out.println("Playing: "+hand);
         return hand;
+    }
+    public Map<String, Object> FetchTurnInformation(){
+        return turnInformation;
     }
 }

@@ -13,6 +13,7 @@ import freemarker.template.Template;
 import java.io.StringWriter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import NodeJsServer.NodeJsServerRunner;
 import org.apache.ivy.Main;
@@ -84,6 +85,13 @@ public class RouteHandler {
                 data.put("playersTurn",game.currentRound.currentPlayer.name);
                 data.put("cardsInHand",game.GetPlayer(urlName).hand.cards);
                 data.put("liarsCard", game.currentRound.liarsCard);
+                List<Player> alivePlayers = game.getAlivePlayers();
+                List<String> alivePlayersNames = alivePlayers.stream().map(player -> player.name).collect(Collectors.toList());
+
+                data.put("alivePlayers", alivePlayersNames);
+                Map<String,Object> moveInfo = game.currentRound.FetchTurnInformation();
+                System.out.println("Move info: " + moveInfo);
+                data.put("moveInfo",moveInfo);
             }
             return gson.toJson(data);
         });

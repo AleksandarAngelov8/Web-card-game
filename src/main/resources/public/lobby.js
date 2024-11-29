@@ -10,6 +10,8 @@ let numPlayedHands = 0;
 let liarsCard;
 let canCall = false;
 let JAVA_SERVER_HOST;
+let alivePlayers;
+
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
 const playerList = document.getElementById('player-list');
@@ -24,6 +26,9 @@ const playHandButton = document.getElementById("playHand");
 const callPrevHandButton = document.getElementById("callPrevHand");
 const cardsDiv = document.getElementById("cardsDiv");
 const liarsCardH3 = document.getElementById("liarsCard");
+const playersTurnH3 = document.getElementById("playersTurn");
+const alivePlayersH3 = document.getElementById("alivePlayers");
+const logDiv = document.getElementById("logDiv");
 
 let players = [
 ];
@@ -56,15 +61,69 @@ function loadGameData(){
                 divLobby.style.display = "inline";
             }
             playersTurn = data.playersTurn;
+            playersTurnH3.innerHTML = `It's ${playersTurn}'s turn`;
             isCurrentlyPlaying = playersTurn === username
             callPrevHandButton.disabled = !isCurrentlyPlaying || !canCall;
-            //console.log("Number of played hands: " + numPlayedHands);
-            //console.log("Is currently playing: " + isCurrentlyPlaying);
-            //console.log("Player's turn: " + playersTurn);
+
             cards = data.cardsInHand;
             if (cards !== undefined) setCardsView();
             liarsCard = data.liarsCard;
-            liarsCardH3.innerHTML = liarsCard;
+            liarsCardH3.innerHTML = `Liars card this round: ${liarsCard}`;
+            alivePlayers = data.alivePlayers;
+            alivePlayersH3.innerHTML = `Alive players: ${alivePlayers}`;
+
+            const logData = data.moveInfo;
+
+            if (logData !== undefined && logData["moveType"] !== undefined){
+                const logEntryDiv = document.createElement("div");
+                logEntryDiv.classList.add("logEntry"); // Apply the "logEntry" class to each log entry
+
+                if (logData["moveType"] === "C") {
+                    const playerMoving = logData["playerMoving"];
+                    const previousPlayer = logData["previousPlayer"];
+                    const allegedPlayedHand = JSON.stringify(logData["allegedPlayedHand"]);
+                    const playedHand = JSON.stringify(logData["playedHand"]);
+                    const wasLie = logData["wasLie"];
+                    const shootingSuccess = logData["shootingSuccess"];
+
+                    logEntryDiv.innerHTML = `<span class="playerName">${playerMoving}</span> called out <span class="playerName">${previousPlayer}</span>'s hand:<br>`;
+                    logEntryDiv.innerHTML += `Alleged hand: ${allegedPlayedHand}<br>`;
+                    logEntryDiv.innerHTML += `Actual hand: ${playedHand}<br>`;
+
+                    if (wasLie) {
+                        logEntryDiv.innerHTML += "It was a lie!<br>";
+                        logEntryDiv.innerHTML += `<span class="playerName">${previousPlayer}</span> is shooting themselves..<br>`;
+                        if (shootingSuccess) logEntryDiv.innerHTML += `${previousPlayer} killed themselves.<br>`;
+                        else logEntryDiv.innerHTML += `It was a blank.<br>`;
+                    } else {
+                        logEntryDiv.innerHTML += "It was NOT a lie!<br>";
+                        logEntryDiv.innerHTML += `<span class="playerName">${playerMoving}</span> is shooting themselves..<br>`;
+                        if (shootingSuccess) logEntryDiv.innerHTML += `${playerMoving} killed themselves.<br>`;
+                        else logEntryDiv.innerHTML += `It was a blank.<br>`;
+                    }
+
+                    // Append to the log container
+                    document.getElementById("logDiv").appendChild(logEntryDiv);
+                }
+                else if (logData["moveType"] === "P") {
+                    logEntryDiv.innerHTML = "Playing:\n";
+                    const playerMoving = logData["playerMoving"];
+                    const allegedPlayedHand = JSON.stringify(logData["allegedPlayedHand"]);
+
+                    // Wrap player name in a <span> for styling
+                    logEntryDiv.innerHTML += `<span class="playerName">${playerMoving}</span> claims: <span class="hand">${allegedPlayedHand}</span>:\n`;
+
+                    // Append the new log entry to the log container
+                    const logContainer = document.getElementById("logDiv");
+                    logContainer.appendChild(logEntryDiv);
+
+                    // Scroll to the bottom of the log container
+                    logContainer.scrollTop = logContainer.scrollHeight;
+                }
+                logDiv.className = "logEntry";
+                logDiv.appendChild(logEntryDiv);
+                logDiv.scrollTop = logDiv.scrollHeight;
+            }
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

@@ -32,7 +32,14 @@
 
 
     <div id="container">
-        <div id="infoDiv"><h3 id="liarsCard"></h3></div>
+        <div id="infoDiv">
+            <h3 id="liarsCard"></h3>
+            <h3 id="playersTurn"></h3>
+            <h3 id="alivePlayers"></h3>
+            <div id="logDiv">
+
+            </div>
+        </div>
         <div id="user" class="user_div">
             <div id="cardsDiv"></div>
             <button id="playHand" onclick="playHand()" disabled>Play</button>

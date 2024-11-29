@@ -39,4 +39,11 @@ public class Game {
         System.out.println("Player with this name not found: " + name);
         return null;
     }
+    public List<Player> getAlivePlayers(){
+        List<Player> alivePlayers = new ArrayList();
+        for (Player player: players){
+            if (player.alive) alivePlayers.add(player);
+        }
+        return alivePlayers;
+    }
 }

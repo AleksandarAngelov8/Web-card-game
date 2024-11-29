@@ -54,6 +54,8 @@ function loadGameData(){
             gameStarted = data.gameStarted;
             username = data.name;
             players = data.users;
+            alivePlayers = data.alivePlayers;
+            alivePlayersH3.innerHTML = `Alive players: ${alivePlayers}`;
             if (gameStarted === "1"){
                 loadGameState();
             }
@@ -69,14 +71,12 @@ function loadGameData(){
             if (cards !== undefined) setCardsView();
             liarsCard = data.liarsCard;
             liarsCardH3.innerHTML = `Liars card this round: ${liarsCard}`;
-            alivePlayers = data.alivePlayers;
-            alivePlayersH3.innerHTML = `Alive players: ${alivePlayers}`;
+
 
             const logData = data.moveInfo;
 
             if (logData !== undefined && logData["moveType"] !== undefined){
                 const logEntryDiv = document.createElement("div");
-                logEntryDiv.classList.add("logEntry"); // Apply the "logEntry" class to each log entry
 
                 if (logData["moveType"] === "C") {
                     const playerMoving = logData["playerMoving"];
@@ -123,6 +123,22 @@ function loadGameData(){
                 logDiv.className = "logEntry";
                 logDiv.appendChild(logEntryDiv);
                 logDiv.scrollTop = logDiv.scrollHeight;
+            }
+            if (data.shouldRestart !== undefined){
+                const logEntryDiv = document.createElement("div");
+                logEntryDiv.classList.add("logEntry"); // Apply the "logEntry" class to each log entry
+
+                logEntryDiv.innerHTML = `Winner is ${alivePlayers[0]}\n`;
+                logEntryDiv.innerHTML += "Restarting game in 5 seconds..";
+                const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+                (async () => {
+                    await delay(5000); // Wait for 5 seconds
+                    location.reload(); // Reload the page
+                })();
+                document.getElementById("logDiv").appendChild(logEntryDiv);
+                logDiv.scrollTop = logDiv.scrollHeight;
+
             }
         })
         .catch(error => {

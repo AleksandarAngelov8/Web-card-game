@@ -11,6 +11,7 @@ public class Round {
     public Hand lastPlayedHand;
     Random random;
     Map<String, Object> turnInformation;
+    public int restartCounter;
     public Round(Game g){
         random = new Random();
         game = g;
@@ -19,6 +20,7 @@ public class Round {
         turnInformation = new HashMap<>();
 
         DistributeCards();
+        restartCounter = -1;
     }
     private void SetNewLiarsCard(){
         CardType newCard = liarsCard;
@@ -186,6 +188,7 @@ public class Round {
         for (Player player: game.players){
             if (player.alive) System.out.println(player.name);
         }
+        restartCounter = 0;
     }
     private String ConvertHandString(String handUnformatted){
         Map handCards = new Gson().fromJson(handUnformatted, Map.class);

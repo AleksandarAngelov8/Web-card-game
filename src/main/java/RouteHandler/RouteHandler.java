@@ -76,6 +76,11 @@ public class RouteHandler {
             response.type("application/json");
 
             Map<String, Object> data = new HashMap<>();
+            if (game != null && game.currentRound.restartCounter > -1){
+                if (game.currentRound.restartCounter == 3) game = null;
+                else game.currentRound.restartCounter++;
+                data.put("shouldRestart",true);
+            }
             Map<String, User> otherUsers = userRightsManager.getOnlineUsers();
             otherUsers.remove(urlName);
             data.put("users", otherUsers.keySet());

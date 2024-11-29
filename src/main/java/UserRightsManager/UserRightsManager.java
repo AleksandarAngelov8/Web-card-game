@@ -44,6 +44,10 @@ public class UserRightsManager {
     public boolean authenticate(String username, String password, String sessionToken) {
         User user = users.get(username);
         if (user != null && user.authenticate(password)){
+            if (getUsers().get(username).IsOnline()) {
+                System.out.println("Session token: " + getUsers().get(username).sessionToken);
+                return false;
+            }
             user.activateSession(sessionToken);
             return true;
         }

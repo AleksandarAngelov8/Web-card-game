@@ -39,7 +39,7 @@ const messageHandlers = {
         broadcast({ type: "setLeader", leader: leader });
         const users = Array.from(clients.values());
         broadcast({ type: "setUsers", users: users});
-        broadcast({ type: "join", user: username });
+        broadcast({ type: "join", user: username, javaHost:JAVA_SERVER_HOST });
     },
     raise_hand(ws, data) {
         const username = data.username;
@@ -102,6 +102,7 @@ wss.on("connection", (ws) => {
             }
             broadcast({type: "setLeader", leader});
         }
+
     });
 });
 

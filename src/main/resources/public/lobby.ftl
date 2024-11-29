@@ -23,6 +23,7 @@
         </form>
     </div>
     <button type= "submit" id="startButton" onclick="startGame()" disabled>Start</button>
+    <button type= "submit" id="startButton" onclick="logOut()" >LogOut</button>
 </div>
 <div id="game" style="display: none">
     <h2>Welcome to the Dashboard, ${name}!</h2>

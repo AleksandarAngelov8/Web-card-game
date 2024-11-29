@@ -9,7 +9,7 @@ let isCurrentlyPlaying = false;
 let numPlayedHands = 0;
 let liarsCard;
 let canCall = false;
-
+let JAVA_SERVER_HOST;
 const divLobby = document.getElementById("lobby");
 const divGame =  document.getElementById("game");
 const playerList = document.getElementById('player-list');
@@ -86,6 +86,7 @@ const messageHandlers = {
     join(messageData) {
         addChatMessage(messageData.user + " has been resurrected.");
         updatePlayerList();
+        JAVA_SERVER_HOST = messageData.javaHost;
     },
     chatMessage(messageData) {
         const user = messageData.user;
@@ -187,10 +188,15 @@ function startGame(){
 function sendRaiseHand(){
     sendMessage({ type: "raise_hand", username });
 }
+function logOut(){
+    sendToJava("logout");
+    window.location = `http://${JAVA_SERVER_HOST}:4567/login`;
+}
 window.startGame = startGame;
 window.sendRaiseHand = sendRaiseHand;
 window.playHand = playHand;
 window.callPrevHand = callPrevHand;
+window.logOut = logOut;
 function playHand (){
     let hand = new Map();
 
@@ -292,4 +298,12 @@ function selectCardHandler(event) {
 function deselectCardHandler(event) {
     const cardId = event.currentTarget.id; // Get the card ID
     selectCard(cardId);
+}
+function sendToJava(route,data={}){
+    fetch(`http://${JAVA_SERVER_HOST}:4567/` + route, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }).catch(error => console.error('Error updating info:', error));
 }

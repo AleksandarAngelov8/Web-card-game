@@ -1,7 +1,5 @@
 // sharedWebSocket.js
-const wsURL = window.location.hostname === 'localhost'
-    ? "ws://localhost:3000/ws"
-    : "ws://91.139.20.23:3000/ws";
+const wsURL = "wss://2933-2a02-908-113-9ac0-48a5-3e2d-3caf-c287.ngrok-free.app";
 
 export const ws = new WebSocket(wsURL);
 

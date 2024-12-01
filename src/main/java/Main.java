@@ -8,7 +8,7 @@ public class Main {
         MongoDBHandler connectionHandler = new MongoDBHandler();
         UserRightsManager userRightsManager = new UserRightsManager(connectionHandler);
         RouteHandler.SetupRoutes(userRightsManager);
-        NodeJsServerRunner.Run();
+        NodeJsServerRunner.RunServer();
         //userRightsManager.printUserInfo();
 
     }

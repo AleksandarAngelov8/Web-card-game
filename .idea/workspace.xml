@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="added game over, back to lobby">
+    <list default="true" id="703a6c8c-efd9-4c86-956b-ee99d202dc45" name="Changes" comment="logic changes, new round after every shot, regardless of success, only 3 cards selectable, fixed bug with messed up currentPlayer, if every other player has played all their cards the left player is forced to call">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Round.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RouteHandler/RouteHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/lobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/lobby.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NodeJsServer/NodeJsServerRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NodeJsServer/NodeJsServerRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/public/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/websocket.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +203,10 @@
       <workItem from="1732721356246" duration="15940000" />
       <workItem from="1732746165427" duration="8076000" />
       <workItem from="1732809000805" duration="29530000" />
-      <workItem from="1732893901815" duration="12150000" />
+      <workItem from="1732893901815" duration="12268000" />
+      <workItem from="1732921918056" duration="71000" />
+      <workItem from="1733068376805" duration="2523000" />
+      <workItem from="1733071037046" duration="2894000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -376,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732885364789</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="logic changes, new round after every shot, regardless of success, only 3 cards selectable, fixed bug with messed up currentPlayer, if every other player has played all their cards the left player is forced to call">
+      <option name="closed" value="true" />
+      <created>1732906507589</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1732906507589</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +423,8 @@
     <MESSAGE value="very basic ui for selecting, showing and playing cards" />
     <MESSAGE value="fixed being able to log in as two users at the same time" />
     <MESSAGE value="added game over, back to lobby" />
-    <option name="LAST_COMMIT_MESSAGE" value="added game over, back to lobby" />
+    <MESSAGE value="logic changes, new round after every shot, regardless of success, only 3 cards selectable, fixed bug with messed up currentPlayer, if every other player has played all their cards the left player is forced to call" />
+    <option name="LAST_COMMIT_MESSAGE" value="logic changes, new round after every shot, regardless of success, only 3 cards selectable, fixed bug with messed up currentPlayer, if every other player has played all their cards the left player is forced to call" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
